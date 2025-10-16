@@ -16,15 +16,16 @@ CREATE TABLE IF NOT EXISTS trace_runs (
     generated_at TIMESTAMP DEFAULT current_timestamp
 );
 
-CREATE TABLE IF NOT EXISTS emails_raw (
-    email_hash TEXT PRIMARY KEY,
-    subject TEXT,
-    body TEXT,
-    metadata JSON,
-    run_id TEXT,
-    ingested_at TIMESTAMP DEFAULT current_timestamp,
-    FOREIGN KEY (run_id) REFERENCES trace_runs(run_id)
-);
+-- emails_raw table removed: email data now read directly from trace JSON files
+-- CREATE TABLE IF NOT EXISTS emails_raw (
+--     email_hash TEXT PRIMARY KEY,
+--     subject TEXT,
+--     body TEXT,
+--     metadata JSON,
+--     run_id TEXT,
+--     ingested_at TIMESTAMP DEFAULT current_timestamp,
+--     FOREIGN KEY (run_id) REFERENCES trace_runs(run_id)
+-- );
 
 CREATE TABLE IF NOT EXISTS annotations (
     annotation_id TEXT PRIMARY KEY,
@@ -35,7 +36,6 @@ CREATE TABLE IF NOT EXISTS annotations (
     run_id TEXT,
     created_at TIMESTAMP DEFAULT current_timestamp,
     updated_at TIMESTAMP,
-    FOREIGN KEY (email_hash) REFERENCES emails_raw(email_hash),
     FOREIGN KEY (labeler_id) REFERENCES labelers(labeler_id),
     FOREIGN KEY (run_id) REFERENCES trace_runs(run_id)
 );
@@ -62,5 +62,4 @@ CREATE TABLE IF NOT EXISTS axial_links (
 
 CREATE INDEX IF NOT EXISTS idx_annotations_email_hash ON annotations(email_hash);
 CREATE INDEX IF NOT EXISTS idx_annotations_run_id ON annotations(run_id);
-CREATE INDEX IF NOT EXISTS idx_emails_run_id ON emails_raw(run_id);
 CREATE INDEX IF NOT EXISTS idx_axial_links_run_id ON axial_links(run_id);

@@ -441,6 +441,7 @@ function bindEvents() {
       elements.failureBtn.click();
     }
   });
+}
 
 window.addEventListener('DOMContentLoaded', async () => {
   bindEvents();

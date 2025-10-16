@@ -22,6 +22,7 @@ from flask import Flask, jsonify, render_template, request
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DUCKDB_PATH = REPO_ROOT / "data" / "email_annotations.duckdb"
 SCHEMA_SQL_PATH = REPO_ROOT / "sql" / "annotation_schema.sql"
+TRACE_ROOT = REPO_ROOT / "annotation" / "traces"
 
 app = Flask(
     __name__,
@@ -56,50 +57,74 @@ def resolve_run_id(
     return latest_run_id(conn)
 
 
-def load_email(
-    conn: duckdb.DuckDBPyConnection, email_hash: str
-) -> Optional[Dict[str, Any]]:
-    result = conn.execute(
-        """
-        SELECT email_hash, subject, body, metadata, run_id
-        FROM emails_raw
-        WHERE email_hash = ?
-        LIMIT 1
-        """,
-        (email_hash,),
-    ).fetchone()
-    if not result:
+def load_trace_file(run_id: str, email_hash: str) -> Optional[Dict[str, Any]]:
+    """Load trace JSON file for a given run_id and email_hash."""
+    trace_file = TRACE_ROOT / run_id / f"trace_{email_hash}.json"
+    if not trace_file.exists():
         return None
-    metadata = json.loads(result[3]) if result[3] else {}
-    summary = metadata.get("llm_summary")
-    commitments = metadata.get("llm_commitments") or []
+    try:
+        trace_data = json.loads(trace_file.read_text(encoding="utf-8"))
+        return trace_data
+    except (json.JSONDecodeError, IOError):
+        return None
+
+
+def load_email(run_id: str, email_hash: str) -> Optional[Dict[str, Any]]:
+    """Load email data from trace JSON file."""
+    trace_data = load_trace_file(run_id, email_hash)
+    if not trace_data:
+        return None
+
+    metadata = trace_data.get("metadata", {}).get("extra", {})
+
+    # Extract LLM output from response
+    response_content = trace_data.get("response", {}).get("messages", [{}])[0].get("content", "{}")
+    try:
+        llm_output = json.loads(response_content)
+        summary = llm_output.get("summary", "")
+        commitments = llm_output.get("commitments", [])
+    except json.JSONDecodeError:
+        summary = ""
+        commitments = []
+
+    # Extract email body from request
+    request_content = trace_data.get("request", {}).get("messages", [{}])[0].get("content", "")
+    # Parse body from the prompt (it's between triple backticks)
+    body_match = request_content.split("```")
+    body = body_match[1].strip() if len(body_match) > 2 else ""
+
+    # Extract subject from metadata
+    subject = metadata.get("normalized_subject", "").title() or "(no subject)"
+
     return {
-        "email_hash": result[0],
-        "subject": result[1],
-        "body": result[2],
+        "email_hash": email_hash,
+        "subject": subject,
+        "body": body,
         "metadata": metadata,
-        "run_id": result[4],
+        "run_id": run_id,
         "summary": summary,
         "commitments": commitments,
     }
 
 
-def list_emails(conn: duckdb.DuckDBPyConnection, run_id: str) -> List[Dict[str, Any]]:
-    rows = conn.execute(
-        """
-        SELECT email_hash, subject, metadata
-        FROM emails_raw
-        WHERE run_id = ?
-        ORDER BY email_hash
-        """,
-        (run_id,),
-    ).fetchall()
+def list_emails(run_id: str) -> List[Dict[str, Any]]:
+    """List all emails for a given run by scanning trace directory."""
+    run_dir = TRACE_ROOT / run_id
+    if not run_dir.exists():
+        return []
+
     emails = []
-    for email_hash_value, subject, metadata_json in rows:
-        metadata = json.loads(metadata_json) if metadata_json else {}
-        emails.append(
-            {"email_hash": email_hash_value, "subject": subject, "metadata": metadata}
-        )
+    for trace_file in sorted(run_dir.glob("trace_*.json")):
+        email_hash = trace_file.stem.replace("trace_", "")
+        trace_data = load_trace_file(run_id, email_hash)
+        if trace_data:
+            metadata = trace_data.get("metadata", {}).get("extra", {})
+            subject = metadata.get("normalized_subject", "").title() or "(no subject)"
+            emails.append({
+                "email_hash": email_hash,
+                "subject": subject,
+                "metadata": metadata,
+            })
     return emails
 
 
@@ -184,7 +209,7 @@ def api_context():
         run_id = resolve_run_id(conn, request.args.get("run_id"))
         if not run_id:
             return jsonify({"error": "No trace runs loaded yet"}), 400
-        emails = list_emails(conn, run_id)
+        emails = list_emails(run_id)
         return jsonify(
             {
                 "run_id": run_id,
@@ -200,7 +225,12 @@ def api_context():
 @app.get("/api/email/<email_hash>")
 def api_email(email_hash: str):
     with get_conn() as conn:
-        email = load_email(conn, email_hash)
+        # Get run_id from query param or use latest
+        run_id = resolve_run_id(conn, request.args.get("run_id"))
+        if not run_id:
+            return jsonify({"error": "No trace runs available"}), 400
+
+        email = load_email(run_id, email_hash)
         if not email:
             return jsonify({"error": "Email not found"}), 404
         annotations = get_annotations(conn, email_hash)
@@ -241,7 +271,11 @@ def api_annotations_create():
     annotation_id = uuid.uuid4().hex
     created_at = datetime.utcnow().isoformat() + "Z"
     with get_conn() as conn:
-        email = load_email(conn, email_hash_value)
+        run_id = resolve_run_id(conn, request.args.get("run_id"))
+        if not run_id:
+            return jsonify({"error": "No trace runs available"}), 400
+
+        email = load_email(run_id, email_hash_value)
         if not email:
             return jsonify({"error": "Email not found"}), 404
         if labeler_id:

@@ -142,27 +142,6 @@ def ingest_trace_run(
     )
 
 
-def record_email(
-    conn: duckdb.DuckDBPyConnection,
-    artifacts: TraceArtifacts,
-    email_hash: str,
-    subject: str,
-    body: str,
-    metadata: dict,
-) -> None:
-    conn.execute(
-        """
-        INSERT OR REPLACE INTO emails_raw(email_hash, subject, body, metadata, run_id)
-        VALUES (?, ?, ?, ?, ?)
-        """,
-        (
-            email_hash,
-            subject,
-            body,
-            json.dumps(metadata, ensure_ascii=False),
-            artifacts.run_id,
-        ),
-    )
 
 
 def _fmt(value: object, default: str = "Unknown") -> str:
@@ -308,8 +287,6 @@ def process_csv(
                 job.body,
                 job.metadata,
             )
-            job.metadata["llm_summary"] = summary
-            job.metadata["llm_commitments"] = commitments
             return job, summary, commitments, prompt_text
 
         if workers > 1:
@@ -319,10 +296,6 @@ def process_csv(
             results = [summarize(job) for job in tqdm(jobs, desc="Summarizing", total=len(jobs))]
 
         for job, summary, commitments, prompt_text in results:
-            record_email(
-                conn, artifacts, job.email_hash, job.subject, job.body, job.metadata
-            )
-
             trace_payload = create_trace_json(
                 artifacts,
                 job.email_hash,
