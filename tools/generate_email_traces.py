@@ -1,5 +1,5 @@
-from tqdm import tqdm
 #!/usr/bin/env python3
+
 """Generate LLM-produced trace files and seed DuckDB tables for the workshop.
 
 Key behaviours:
