@@ -20,7 +20,7 @@ import os
 import shutil
 import subprocess
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from tqdm import tqdm
 from typing import Iterable, List, Tuple
@@ -226,7 +226,7 @@ def create_trace_json(
     metadata: dict,
     prompt_text: str,
 ) -> dict:
-    timestamp = datetime.now(datetime.timezone.utc).isoformat() + "Z"
+    timestamp = datetime.now(timezone.utc).isoformat() + "Z"
     return {
         "metadata": {
             "email_hash": email_hash,
