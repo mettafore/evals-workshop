@@ -13,4 +13,5 @@ dependencies = [
     "duckdb>=1.1.2",
     "pydantic-ai>=0.0.15",
     "ruff>=0.14.0",
+    "python-dotenv>=1.1.1",
 ]

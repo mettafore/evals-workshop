@@ -23,6 +23,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Iterable, List, Tuple
 from concurrent.futures import ThreadPoolExecutor
+from dotenv import load_dotenv
+load_dotenv()  # Load environment variables from a .env file if present
 
 try:
     import duckdb  # type: ignore
@@ -358,7 +360,7 @@ def main(argv: Iterable[str] | None = None) -> None:
     parser.add_argument(
         "--model",
         type=str,
-        default=os.environ.get("PYDANTIC_AI_MODEL", "openai:gpt-4o-mini"),
+        default=os.environ.get("PYDANTIC_AI_MODEL"),
         help="Model identifier understood by pydantic-ai (default: env PYDANTIC_AI_MODEL or openai:gpt-4o-mini)",
     )
     parser.add_argument(
