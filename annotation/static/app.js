@@ -59,7 +59,7 @@ async function loadContext() {
   state.labelers = data.labelers || [];
   elements.runId.textContent = state.runId;
   updatePosition();
-  populateLabelers();
+  
   if (state.emailHashes.length) {
     await loadEmail(state.emailHashes[state.index]);
   }
@@ -295,6 +295,10 @@ function bindEvents() {
     }
   });
   elements.annotateBtn.addEventListener('click', () => {
+    if (!elements.labelerSelect.value) {
+      alert('Select or create a labeler before annotating.');
+      return;
+    }
     elements.annotationDialog.showModal();
     setTimeout(() => elements.annotationText.focus(), 50);
   });
@@ -317,7 +321,17 @@ function bindEvents() {
       body: JSON.stringify({ name }),
     });
     state.labelers.push([created.labeler_id, created.name]);
-    populateLabelers();
+    
+    elements.labelerSelect.value = created.labeler_id;
+  });
+    const name = prompt('Labeler name');
+    if (!name) return;
+    const created = await fetchJSON('/api/labelers', {
+      method: 'POST',
+      body: JSON.stringify({ name }),
+    });
+    state.labelers.push([created.labeler_id, created.name]);
+    
     elements.labelerSelect.value = created.labeler_id;
   });
 
@@ -338,6 +352,10 @@ function bindEvents() {
       event.preventDefault();
       elements.nextBtn.click();
     } else if (event.key.toLowerCase() === 'a') {
+      if (!elements.labelerSelect.value) {
+        alert('Select or create a labeler before annotating.');
+        return;
+      }
       event.preventDefault();
       elements.annotateBtn.click();
     } else if (event.key.toLowerCase() === 'f') {
