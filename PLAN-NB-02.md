@@ -8,12 +8,12 @@
 ## 2. Notebook 02 Outline
 0. **Prerequisite: Generate Annotation Traces**
    - Instruct users to choose the source email file (`../data/filtered_emails.csv` or another exported slice) and run `python tools/generate_email_traces.py --emails ../data/filtered_emails.csv --out annotation/traces/` (script modeled after `recipe-chatbot/scripts/bulk_test_traces.py`).
-   - Each trace run should derive a `run_id` from `git rev-parse --short HEAD`; traces are written under `annotation/traces/{run_id}/trace_*.json` so the commit-version linkage is obvious without extra tooling.
-   - Include an optional notebook cell (`!python ../tools/generate_email_traces.py --emails {DATA_SOURCE_PATH} --out ../annotation/traces`) so workshop facilitators can demo trace generation live without leaving Jupyter; surface progress info within the notebook via captured stdout.
+   - Each trace run should derive a `run_id` from `git rev-parse --short HEAD`; traces are written under `annotation/traces/{run_id}/trace_*.json` so the commit-version linkage is obvious without extra tooling. The generator aborts if the git worktree is dirty—commit/stash before invoking it.
+   - Include an optional notebook cell (`!python ../tools/generate_email_traces.py --emails {DATA_SOURCE_PATH} --out ../annotation/traces [--workers N]`) so workshop facilitators can demo trace generation live without leaving Jupyter; surface progress info within the notebook via captured stdout.
    - Script responsibilities:
-     - Load emails, feed them through the summarizer (or placeholder prompt) to produce trace JSON with request/response history.
-    - Reuse the finalized prompt saved by Notebook 01 (`../prompts/email_summary_prompt.txt`); when ingesting traces into DuckDB simply stamp rows with the current `run_id` so the prompt version is implied without extra metadata files.
-     - Persist traces under `annotation/traces/{run_id}/trace_*.json` with deterministic naming.
+     - Call the configured LLM via Pydantic AI (validated against a `SummaryPayload` Pydantic model) with the saved prompt to produce JSON summaries/commitments for each email (no offline fallback).
+     - Reuse the finalized prompt saved by Notebook 01 (`../prompts/email_summary_prompt.txt`); when ingesting traces into DuckDB simply stamp rows with the current `run_id` so the prompt version is implied without extra metadata files.
+     - Persist traces under `annotation/traces/{run_id}/trace_*.json` with deterministic naming and copy both the prompt and source CSV into the same run folder for offline provenance.
      - Optionally register new emails into DuckDB (`emails_raw`) for downstream joins and stamp each row with the `run_id`.
    - Notebook references assume traces are present before launch; provide quick diagnostic cell to count files and raise instructions if missing.
 

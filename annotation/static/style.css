@@ -1,0 +1,264 @@
+:root {
+  color-scheme: light dark;
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  background: #f6f7fb;
+  color: #1c1c28;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #f6f7fb;
+}
+
+#status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: #101323;
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+#layout {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  min-height: calc(100vh - 60px);
+}
+
+#email-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.nav-buttons button {
+  background: #20273d;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.nav-buttons button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(32, 39, 61, 0.25);
+}
+
+.email-card {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 15px 45px rgba(16, 19, 35, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.email-card header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #101323;
+}
+
+.metadata-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.metadata-chips .chip {
+  background: #eef1ff;
+  color: #1c2155;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+}
+
+.email-body {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background: #f6f8ff;
+  border: 1px solid #dfe3f7;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  white-space: pre-wrap;
+  line-height: 1.45;
+  color: #1c2155;
+}
+
+.email-body blockquote {
+  border-left: 3px solid #c3ccff;
+  margin-left: 0;
+  padding-left: 0.75rem;
+  color: #5c62a6;
+}
+
+#annotation-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.annotation-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.annotation-actions button {
+  flex: 1;
+  border: none;
+  cursor: pointer;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #3f51b5, #2196f3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.annotation-actions button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 32px rgba(63, 81, 181, 0.3);
+}
+
+.annotation-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.annotation-item {
+  background: #ffffff;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid #3f51b5;
+  box-shadow: 0 8px 24px rgba(16, 19, 35, 0.08);
+  display: grid;
+  gap: 0.5rem;
+}
+
+.annotation-item.pass {
+  border-left-color: #31c48d;
+}
+
+.annotation-item.fail {
+  border-left-color: #f97066;
+}
+
+.annotation-item header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #5c5f7a;
+}
+
+.annotation-item p {
+  margin: 0;
+  color: #202340;
+}
+
+.annotation-item button {
+  align-self: flex-end;
+  border: none;
+  background: none;
+  color: #9b9fbf;
+  cursor: pointer;
+}
+
+.chip-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chip-container .chip {
+  background: #ffe8e6;
+  color: #b3261e;
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+}
+
+.chip-container .chip button {
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+#annotation-dialog, #failure-dialog {
+  border: none;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 25px 45px rgba(10, 12, 32, 0.35);
+}
+
+#annotation-dialog form,
+#failure-dialog form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+#annotation-dialog textarea,
+#failure-dialog textarea,
+#failure-dialog input,
+select {
+  font-family: inherit;
+  border-radius: 0.6rem;
+  border: 1px solid #c8cce4;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.95rem;
+}
+
+menu {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  padding: 0;
+}
+
+menu button {
+  border: none;
+  border-radius: 0.6rem;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+menu button[type="submit"],
+menu button[value="confirm"] {
+  background: linear-gradient(135deg, #3f51b5, #2196f3);
+  color: #fff;
+}
+
+menu button[type="reset"],
+menu button[value="cancel"] {
+  background: #e0e3f5;
+  color: #1f254f;
+}
+
+@media (max-width: 960px) {
+  #layout {
+    grid-template-columns: 1fr;
+  }
+}

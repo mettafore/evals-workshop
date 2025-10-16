@@ -5,6 +5,12 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "ipywidgets>=8.1.7",
+    "marimo>=0.16.5",
     "matplotlib>=3.10.7",
     "pandas>=2.3.3",
+    "pydantic>=2.12.2",
+    "duckdb>=1.1.2",
+    "pydantic-ai>=0.0.15",
+    "ruff>=0.14.0",
 ]

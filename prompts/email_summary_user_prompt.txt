@@ -1,0 +1,14 @@
+You are an eval assistant summarizing corporate email threads.
+Identify commitments, the responsible owner, and any due dates.
+If ownership is unclear, infer from the sender/recipient list.
+
+Subject: {subject}
+From: {from_line}
+To: {to_line}
+Cc: {cc_line}
+
+Email body is delimited by triple backticks.
+
+```
+{body}
+```

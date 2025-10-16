@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Annotation Workbench</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div id="status-bar">
+    <div>
+      <strong>Run:</strong> <span id="run-id">—</span>
+    </div>
+    <div>
+      <strong>Email:</strong> <span id="email-position">0 / 0</span>
+    </div>
+    <div>
+      <label for="labeler-select">Labeler</label>
+      <select id="labeler-select"></select>
+      <button id="new-labeler-btn" type="button">New</button>
+    </div>
+  </div>
+
+  <div id="layout">
+    <div id="email-pane">
+      <div class="nav-buttons">
+        <button id="prev-btn" type="button">⟵ Prev (←)</button>
+        <button id="next-btn" type="button">Next (→) ⟶</button>
+      </div>
+      <article class="email-card" id="email-card">
+        <header>
+          <h1 id="email-subject">Select an email to begin</h1>
+          <div class="metadata-chips" id="metadata-chips"></div>
+        </header>
+        <section class="email-body" id="email-body"></section>
+      </article>
+    </div>
+
+    <div id="annotation-pane">
+      <div class="annotation-actions">
+        <button id="annotate-btn" type="button">Add Annotation (A)</button>
+        <button id="failure-btn" type="button">Link Failure Mode (F)</button>
+        <button id="suggest-btn" type="button">Generate Failure Modes</button>
+      </div>
+
+      <section>
+        <h2>Annotations</h2>
+        <ul id="annotation-list" class="annotation-list"></ul>
+      </section>
+
+      <section>
+        <h2>Selected Failure Modes</h2>
+        <div id="selected-failure-modes" class="chip-container"></div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Annotation modal -->
+  <dialog id="annotation-dialog">
+    <form method="dialog" id="annotation-form">
+      <h3>New Annotation</h3>
+      <label for="annotation-text">Observation</label>
+      <textarea id="annotation-text" rows="4" required></textarea>
+      <label for="annotation-passfail">Pass / Fail</label>
+      <select id="annotation-passfail">
+        <option value="">—</option>
+        <option value="1">Fail</option>
+        <option value="0">Pass</option>
+      </select>
+      <menu>
+        <button value="cancel" type="reset">Cancel (Esc)</button>
+        <button value="confirm" type="submit">Save (Enter)</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <!-- Failure mode modal -->
+  <dialog id="failure-dialog">
+    <form method="dialog" id="failure-form">
+      <h3>Attach Failure Mode</h3>
+      <label for="failure-select">Existing</label>
+      <select id="failure-select"></select>
+      <fieldset>
+        <legend>Or create new</legend>
+        <label for="failure-name">Name</label>
+        <input id="failure-name" type="text" placeholder="e.g. WrongOwnerOrDate">
+        <label for="failure-definition">Definition</label>
+        <textarea id="failure-definition" rows="3" placeholder="Describe the failure mode"></textarea>
+      </fieldset>
+      <menu>
+        <button value="cancel" type="reset">Cancel (Esc)</button>
+        <button value="confirm" type="submit">Apply (Enter)</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
