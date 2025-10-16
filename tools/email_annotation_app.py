@@ -93,7 +93,9 @@ def list_emails(conn: duckdb.DuckDBPyConnection, run_id: str) -> List[Dict[str, 
     emails = []
     for email_hash_value, subject, metadata_json in rows:
         metadata = json.loads(metadata_json) if metadata_json else {}
-        emails.append({"email_hash": email_hash_value, "subject": subject, "metadata": metadata})
+        emails.append(
+            {"email_hash": email_hash_value, "subject": subject, "metadata": metadata}
+        )
     return emails
 
 
@@ -264,9 +266,9 @@ def api_annotations_create():
             ),
         )
     return jsonify(
-            {
-                "annotation_id": annotation_id,
-                "email_hash": email_hash_value,
+        {
+            "annotation_id": annotation_id,
+            "email_hash": email_hash_value,
             "labeler_id": labeler_id,
             "open_code": open_code,
             "pass_fail": pass_fail,

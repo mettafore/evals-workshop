@@ -170,8 +170,14 @@ def _fmt(value: object, default: str = "Unknown") -> str:
 
 def render_prompt(template: str, subject: str, body: str, metadata: dict) -> str:
     sender = _fmt(metadata.get("from_email") or metadata.get("from_raw"))
-    to_line = _fmt(metadata.get("to_emails") or metadata.get("to_raw"), default="(no direct recipients recorded)")
-    cc_line = _fmt(metadata.get("cc_emails") or metadata.get("cc_raw"), default="(no cc recipients recorded)")
+    to_line = _fmt(
+        metadata.get("to_emails") or metadata.get("to_raw"),
+        default="(no direct recipients recorded)",
+    )
+    cc_line = _fmt(
+        metadata.get("cc_emails") or metadata.get("cc_raw"),
+        default="(no cc recipients recorded)",
+    )
     context = {
         "subject": subject or "No subject",
         "from_line": sender,
@@ -283,7 +289,9 @@ def process_csv(
                 if column not in {"body", "subject"} and not pd.isna(row[column])
             }
             jobs.append(
-                EmailJob(email_hash=email_hash, subject=subject, body=body, metadata=metadata)
+                EmailJob(
+                    email_hash=email_hash, subject=subject, body=body, metadata=metadata
+                )
             )
 
         if not jobs:
