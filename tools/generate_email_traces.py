@@ -1,3 +1,4 @@
+from tqdm import tqdm
 #!/usr/bin/env python3
 """Generate LLM-produced trace files and seed DuckDB tables for the workshop.
 
@@ -21,6 +22,7 @@ import subprocess
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
+from tqdm import tqdm
 from typing import Iterable, List, Tuple
 from concurrent.futures import ThreadPoolExecutor
 from dotenv import load_dotenv
@@ -310,9 +312,9 @@ def process_csv(
 
         if workers > 1:
             with ThreadPoolExecutor(max_workers=workers) as pool:
-                results = list(pool.map(summarize, jobs))
+                results = list(tqdm(pool.map(summarize, jobs), total=len(jobs), desc="Summarizing"))
         else:
-            results = [summarize(job) for job in jobs]
+            results = [summarize(job) for job in tqdm(jobs, desc="Summarizing", total=len(jobs))]
 
         for job, summary, commitments, prompt_text in results:
             record_email(
