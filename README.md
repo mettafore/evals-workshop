@@ -10,7 +10,7 @@ Hands-on curriculum for teaching the Analyze → Measure → Improve loop on an 
 - `tools/generate_email_traces.py` – CLI that reads an email CSV, replays the saved prompt, writes request/response traces to `annotation/traces/<run_id>/`, and upserts tables in `data/email_annotations.duckdb`.
 - `tools/email_annotation_app.py` + `annotation/templates/` + `annotation/static/` – keyboard-friendly annotation UI inspired by Notebook 00’s explorer (A to annotate, F to add failure modes, ←/→ to navigate).
 - `sql/annotation_schema.sql` – DuckDB schema (labelers, trace runs, emails, annotations, failure modes, axial links).
-- `prompts/` – current prompt text (`email_summary_prompt.txt`).
+- `prompts/` – `email_summary_prompt.txt` (system prompt saved from Notebook 01) and `email_summary_user_prompt.txt` (user-message template with subject/from/to/cc placeholders).
 - `data/` – raw/filtered email CSVs, synthetic exports, DuckDB catalog.
 
 ## Setup
@@ -21,7 +21,7 @@ Hands-on curriculum for teaching the Analyze → Measure → Improve loop on an 
 ## Core Workflow
 1. **Prepare Data & Prompt**
    - Run Notebook 00 to materialise `data/filtered_emails.csv` (or curate your own slice).
-   - Run Notebook 01 to cover eval framing, tweak the prompt, and execute the “save prompt” cell (writes to `prompts/email_summary_prompt.txt`).
+   - Run Notebook 01 to cover eval framing, tweak the prompt, and execute the “save prompt” cell (writes to `prompts/email_summary_prompt.txt`). Update `prompts/email_summary_user_prompt.txt` if you want to adjust the user-visible instruction (it already injects Subject/From/To/Cc).
 2. **Optional Synthetic Seed**
    - Notebook 01a generates a 160-email synthetic grid across designation/tone/context/intent when real traces are sparse.
 3. **Generate Trace Run**
