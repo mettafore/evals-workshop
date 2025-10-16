@@ -15,7 +15,11 @@ function qs(selector) {
 }
 
 const elements = {
+  runIdInput: qs('#run-id-input'),
+  loadRunBtn: qs('#load-run-btn'),
   runId: qs('#run-id'),
+  llmSummary: qs('#llm-summary'),
+  llmCommitments: qs('#llm-commitments'),
   position: qs('#email-position'),
   labelerSelect: qs('#labeler-select'),
   newLabelerBtn: qs('#new-labeler-btn'),
@@ -52,14 +56,40 @@ async function fetchJSON(url, options = {}) {
   return resp.json();
 }
 
-async function loadContext() {
-  const data = await fetchJSON('/api/context');
+async function loadContext(runIdOverride = null) {
+  const url = runIdOverride ? `/api/context?run_id=${encodeURIComponent(runIdOverride)}` : '/api/context';
+  const data = await fetchJSON(url);
   state.runId = data.run_id;
   state.emailHashes = data.email_hashes || data.email_ids || [];
-  state.labelers = data.labelers || [];
-  elements.runId.textContent = state.runId;
+  let labelers = data.labelers || [];
+
+  if (!labelers.length) {
+    const firstName = prompt('No labelers found. Enter your name to start annotating.');
+    if (!firstName) {
+      alert('Labeler name is required.');
+      return;
+    }
+    const created = await fetchJSON('/api/labelers', {
+      method: 'POST',
+      body: JSON.stringify({ name: firstName }),
+    });
+    labelers = [[created.labeler_id, created.name]];
+  }
+
+
+state.labelers = labelers;
+elements.runId.textContent = state.runId;
+if (runIdOverride) {
+  elements.runIdInput.value = runIdOverride;
+} else if (!elements.runIdInput.value) {
+  elements.runIdInput.value = state.runId;
+}
+  populateLabelers();
+  if (!elements.labelerSelect.value && state.labelers.length) {
+    elements.labelerSelect.value = state.labelers[0][0];
+  }
+  state.index = 0;
   updatePosition();
-  
   if (state.emailHashes.length) {
     await loadEmail(state.emailHashes[state.index]);
   }
@@ -95,13 +125,53 @@ async function loadEmail(emailHash) {
 
   elements.emailSubject.textContent = email.subject || '(no subject)';
   elements.metadataChips.innerHTML = '';
-  Object.entries(email.metadata || {}).forEach(([key, value]) => {
+
+  // Only show essential email metadata with fallbacks
+  const metadata = email.metadata || {};
+
+  const fromValue = metadata.from_email || metadata.from_raw;
+  const toValue = metadata.to_emails || metadata.to_raw;
+  const ccValue = metadata.cc_emails || metadata.cc_raw;
+
+  if (fromValue) {
     const chip = document.createElement('span');
     chip.className = 'chip';
-    chip.textContent = `${key}: ${value}`;
+    chip.textContent = `From: ${fromValue}`;
     elements.metadataChips.appendChild(chip);
-  });
+  }
+
+  if (toValue) {
+    const chip = document.createElement('span');
+    chip.className = 'chip';
+    chip.textContent = `To: ${toValue}`;
+    elements.metadataChips.appendChild(chip);
+  }
+
+  if (ccValue) {
+    const chip = document.createElement('span');
+    chip.className = 'chip';
+    chip.textContent = `Cc: ${ccValue}`;
+    elements.metadataChips.appendChild(chip);
+  }
+
   elements.emailBody.innerHTML = formatBody(email.body || '');
+
+  const summaryText = email.summary ?? metadata.llm_summary ?? '—';
+  elements.llmSummary.textContent = summaryText && summaryText.length ? summaryText : '—';
+  const commitments = email.commitments ?? metadata.llm_commitments ?? [];
+  elements.llmCommitments.innerHTML = '';
+  if (commitments && commitments.length) {
+    commitments.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = item;
+      elements.llmCommitments.appendChild(li);
+    });
+  } else {
+    const li = document.createElement('li');
+    li.textContent = 'No commitments extracted.';
+    elements.llmCommitments.appendChild(li);
+  }
+
   renderAnnotations();
   renderSelectedFailureModes(data.failure_modes || []);
   populateFailureSelect();
@@ -191,13 +261,19 @@ function populateFailureSelect() {
 async function submitAnnotation(event) {
   event.preventDefault();
   const openCode = elements.annotationText.value.trim();
-  if (!openCode) return;
   const passFailRaw = elements.annotationPassFail.value;
   const passFail = passFailRaw === '' ? null : passFailRaw === '1';
+
+  // Require observation text only for fail cases
+  if (!openCode && passFail !== true) {
+    alert('Please provide an observation for fail cases.');
+    return;
+  }
+
   const labelerId = elements.labelerSelect.value || null;
   const payload = {
     email_hash: state.emailHashes[state.index],
-    open_code: openCode,
+    open_code: openCode || '(pass)',
     pass_fail: passFail,
     labeler_id: labelerId,
   };
@@ -275,7 +351,7 @@ async function handleSuggestions() {
         failure_mode_id: created.failure_mode_id,
       }),
     });
-    await loadEmail(emailId);
+    await loadEmail(state.emailHashes[state.index]);
   }
 }
 
@@ -321,18 +397,20 @@ function bindEvents() {
       body: JSON.stringify({ name }),
     });
     state.labelers.push([created.labeler_id, created.name]);
-    
+    populateLabelers();
     elements.labelerSelect.value = created.labeler_id;
   });
-    const name = prompt('Labeler name');
-    if (!name) return;
-    const created = await fetchJSON('/api/labelers', {
-      method: 'POST',
-      body: JSON.stringify({ name }),
-    });
-    state.labelers.push([created.labeler_id, created.name]);
-    
-    elements.labelerSelect.value = created.labeler_id;
+
+  elements.loadRunBtn.addEventListener('click', async () => {
+    const desired = elements.runIdInput.value.trim();
+    await loadContext(desired || null);
+  });
+  elements.runIdInput.addEventListener('keydown', async event => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      const desired = elements.runIdInput.value.trim();
+      await loadContext(desired || null);
+    }
   });
 
   document.addEventListener('keydown', event => {
@@ -363,7 +441,6 @@ function bindEvents() {
       elements.failureBtn.click();
     }
   });
-}
 
 window.addEventListener('DOMContentLoaded', async () => {
   bindEvents();

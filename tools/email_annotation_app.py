@@ -71,12 +71,16 @@ def load_email(
     if not result:
         return None
     metadata = json.loads(result[3]) if result[3] else {}
+    summary = metadata.get("llm_summary")
+    commitments = metadata.get("llm_commitments") or []
     return {
         "email_hash": result[0],
         "subject": result[1],
         "body": result[2],
         "metadata": metadata,
         "run_id": result[4],
+        "summary": summary,
+        "commitments": commitments,
     }
 
 

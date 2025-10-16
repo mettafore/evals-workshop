@@ -8,8 +8,11 @@
 </head>
 <body>
   <div id="status-bar">
-    <div>
-      <strong>Run:</strong> <span id="run-id">—</span>
+    <div class="run-control">
+      <label for="run-id-input"><strong>Run:</strong></label>
+      <input id="run-id-input" type="text" placeholder="latest" />
+      <button id="load-run-btn" type="button">Load</button>
+      <span id="run-id">—</span>
     </div>
     <div>
       <strong>Email:</strong> <span id="email-position">0 / 0</span>
@@ -37,6 +40,12 @@
     </div>
 
     <div id="annotation-pane">
+      <section class="model-output" id="model-output">
+        <h2>LLM Summary</h2>
+        <div id="llm-summary">—</div>
+        <h3>LLM Commitments</h3>
+        <ul id="llm-commitments"></ul>
+      </section>
       <div class="annotation-actions">
         <button id="annotate-btn" type="button">Add Annotation (A)</button>
         <button id="failure-btn" type="button">Link Failure Mode (F)</button>
@@ -59,13 +68,13 @@
   <dialog id="annotation-dialog">
     <form method="dialog" id="annotation-form">
       <h3>New Annotation</h3>
-      <label for="annotation-text">Observation</label>
-      <textarea id="annotation-text" rows="4" required></textarea>
+      <label for="annotation-text">Observation (optional for pass)</label>
+      <textarea id="annotation-text" rows="4"></textarea>
       <label for="annotation-passfail">Pass / Fail</label>
       <select id="annotation-passfail">
         <option value="">—</option>
-        <option value="1">Fail</option>
-        <option value="0">Pass</option>
+        <option value="1">Pass</option>
+        <option value="0">Fail</option>
       </select>
       <menu>
         <button value="cancel" type="reset">Cancel (Esc)</button>

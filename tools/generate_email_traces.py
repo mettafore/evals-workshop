@@ -308,6 +308,8 @@ def process_csv(
                 job.body,
                 job.metadata,
             )
+            job.metadata["llm_summary"] = summary
+            job.metadata["llm_commitments"] = commitments
             return job, summary, commitments, prompt_text
 
         if workers > 1:

@@ -262,3 +262,61 @@ menu button[value="cancel"] {
     grid-template-columns: 1fr;
   }
 }
+
+.run-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.run-control input {
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.5rem;
+  border: 1px solid #c8cce4;
+  min-width: 12rem;
+}
+
+.run-control button {
+  background: linear-gradient(135deg, #3f51b5, #2196f3);
+  color: #fff;
+  border: none;
+  border-radius: 0.6rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.model-output {
+  margin-top: 1.25rem;
+  background: #f5f7ff;
+  border: 1px solid #dfe3f7;
+  border-radius: 0.9rem;
+  padding: 1rem;
+}
+
+.model-output h2 {
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+  color: #1f254f;
+}
+
+.model-output h3 {
+  margin-bottom: 0.4rem;
+  color: #434876;
+}
+
+#llm-summary {
+  white-space: pre-wrap;
+  margin-bottom: 0.8rem;
+  color: #1c2155;
+}
+
+#llm-commitments {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: #1c2155;
+}
+
+#llm-commitments li {
+  margin-bottom: 0.3rem;
+}
