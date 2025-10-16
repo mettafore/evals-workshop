@@ -7,9 +7,9 @@
 
 ## 2. Notebook 02 Outline
 0. **Prerequisite: Generate Annotation Traces**
-   - Instruct users to choose the source email file (`../data/filtered_emails.csv` or another exported slice) and run `python tools/generate_email_traces.py --emails ../data/filtered_emails.csv --out annotation/traces/` (script modeled after `recipe-chatbot/scripts/bulk_test_traces.py`).
+   - Instruct users to choose the source email file (`../data/filtered_emails.csv` or another exported slice) and run `python tools/generate_email_traces.py --emails ../data/filtered_emails.csv --out annotation/traces/ [--prompt prompts/email_summary_prompt_vX.txt]` (script modeled after `recipe-chatbot/scripts/bulk_test_traces.py`).
    - Each trace run should derive a `run_id` from `git rev-parse --short HEAD`; traces are written under `annotation/traces/{run_id}/trace_*.json` so the commit-version linkage is obvious without extra tooling. The generator aborts if the git worktree is dirty—commit/stash before invoking it.
-   - Include an optional notebook cell (`!python ../tools/generate_email_traces.py --emails {DATA_SOURCE_PATH} --out ../annotation/traces [--workers N]`) so workshop facilitators can demo trace generation live without leaving Jupyter; surface progress info within the notebook via captured stdout.
+   - Include an optional notebook cell (`!python ../tools/generate_email_traces.py --emails {DATA_SOURCE_PATH} --out ../annotation/traces [--workers N] [--prompt prompts/email_summary_prompt_vX.txt]`) so workshop facilitators can demo trace generation live without leaving Jupyter; surface progress info within the notebook via captured stdout.
    - Script responsibilities:
      - Call the configured LLM via Pydantic AI (validated against a `SummaryPayload` Pydantic model) with the saved prompt to produce JSON summaries/commitments for each email (no offline fallback).
      - Reuse the finalized prompt saved by Notebook 01 (`../prompts/email_summary_prompt.txt`); when ingesting traces into DuckDB simply stamp rows with the current `run_id` so the prompt version is implied without extra metadata files.
@@ -28,9 +28,10 @@
 
 3. **Data Preparation Section**
    - Provide a parameter/Widget (`DATA_SOURCE = "filtered" | "synthetic"`) so facilitators pick between `filtered_emails.csv` (real) or `synthetic_emails.csv` (Notebook 01a output).
-   - Load the chosen dataset, normalize key fields (`email_id`, `subject`, `body`, composite metadata).
+   - Load the chosen dataset, normalize key fields (`email_hash`, `subject`, `body`, composite metadata).
    - Verify prerequisite traces exist: count `annotation/traces/{run_id}` folders; if empty, surface reminder to run `tools/generate_email_traces.py`.
    - Display a few samples so annotators see exactly what will surface in the UI.
+   - Highlight the `email_hash` column (generated in Notebook 00); note that trace IDs default to this hash for stability/deduping.
 
 4. **Link to Annotation Tool**
    - Markdown explanation of the Flask app derived from `/masala-embed/esci-dataset/annotation/app.py` + `templates/annotate.html`, styled with the ipywidget email card from Notebook 00 (subject header, metadata chips, commitments block, quoted thread styling).
@@ -49,8 +50,8 @@
    - Present ER outline:
      - `labelers(labeler_id PRIMARY KEY, name, email)` — manage annotator identities/permissions.
      - `trace_runs(run_id PRIMARY KEY, prompt_path, prompt_checksum, source_csv, generated_at)` — `run_id` uses the short Git SHA for human-friendly provenance.
-     - `emails_raw(email_id PRIMARY KEY, subject, body, metadata JSON, run_id)`
-     - `annotations(annotation_id PRIMARY KEY, email_id, labeler_id, open_code TEXT, pass_fail INTEGER, run_id, created_at TIMESTAMP)`
+     - `emails_raw(email_hash PRIMARY KEY, subject, body, metadata JSON, run_id)`
+     - `annotations(annotation_id PRIMARY KEY, email_hash, labeler_id, open_code TEXT, pass_fail INTEGER, run_id, created_at TIMESTAMP)`
      - `failure_modes(failure_mode_id PRIMARY KEY, slug, definition, examples JSON)`
      - `axial_links(annotation_id, failure_mode_id)` — many-to-many bridge between raw notes and taxonomy.
    - Notebook will show `duckdb.sql("DESCRIBE ...")` queries so facilitators can confirm migrations ran.

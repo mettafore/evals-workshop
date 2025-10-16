@@ -4,13 +4,14 @@ Hands-on curriculum for teaching the Analyze → Measure → Improve loop on an 
 
 ## Repository Tour
 - `notebooks/00-Obtain-Candidate-Set.ipynb` – filter raw Enron mail into `data/filtered_emails.csv`.
+- (Notebook 00 now appends a cell that hashes each email (subject/body/from/to/cc/etc.) into `email_hash` and de-duplicates by that hash.)
 - `notebooks/01-email-eval-prompt-engineering.ipynb` – introduce evaluation framing, refine the prompt, then save it with the appended cell to `prompts/email_summary_prompt.txt`.
 - `notebooks/01a-generate-synthetic-data.ipynb` – Homework-style synthetic generator (offline template + optional LLM path) producing `data/synthetic_emails.{csv,jsonl}`.
 - `notebooks/02-open-and-axial-coding.ipynb` – analyze annotations from DuckDB, compare failure-mode coverage, and export results.
 - `tools/generate_email_traces.py` – CLI that reads an email CSV, replays the saved prompt, writes request/response traces to `annotation/traces/<run_id>/`, and upserts tables in `data/email_annotations.duckdb`.
 - `tools/email_annotation_app.py` + `annotation/templates/` + `annotation/static/` – keyboard-friendly annotation UI inspired by Notebook 00’s explorer (A to annotate, F to add failure modes, ←/→ to navigate).
 - `sql/annotation_schema.sql` – DuckDB schema (labelers, trace runs, emails, annotations, failure modes, axial links).
-- `prompts/` – `email_summary_prompt.txt` (system prompt saved from Notebook 01) and `email_summary_user_prompt.txt` (user-message template with subject/from/to/cc placeholders).
+- `prompts/` – `email_summary_prompt.txt`, a single template that contains both instructions and placeholders for Subject/From/To/Cc/Body.
 - `data/` – raw/filtered email CSVs, synthetic exports, DuckDB catalog.
 
 ## Setup
@@ -20,17 +21,17 @@ Hands-on curriculum for teaching the Analyze → Measure → Improve loop on an 
 
 ## Core Workflow
 1. **Prepare Data & Prompt**
-   - Run Notebook 00 to materialise `data/filtered_emails.csv` (or curate your own slice).
-   - Run Notebook 01 to cover eval framing, tweak the prompt, and execute the “save prompt” cell (writes to `prompts/email_summary_prompt.txt`). Update `prompts/email_summary_user_prompt.txt` if you want to adjust the user-visible instruction (it already injects Subject/From/To/Cc).
+   - Run Notebook 00 to materialise `data/filtered_emails.csv` (this now includes an `email_hash` column and removes duplicate rows based on that hash).
+   - Run Notebook 01 to cover eval framing, edit the prompt template, and execute the “save prompt” cell (writes to `prompts/email_summary_prompt.txt`, which now includes both instructions and the metadata placeholders). If you create a new variant, save it under a new filename and pass it via `--prompt` when running the trace generator.
 2. **Optional Synthetic Seed**
    - Notebook 01a generates a 160-email synthetic grid across designation/tone/context/intent when real traces are sparse.
 3. **Generate Trace Run**
-   - Commit your worktree (the generator refuses to run with uncommitted changes), then run `python tools/generate_email_traces.py --emails data/filtered_emails.csv [--model provider:model_id] [--workers N]`.
-   - The script calls the configured LLM via Pydantic AI (validated against the `SummaryPayload` schema), optionally parallelises the LLM calls (`--workers`), derives `run_id = git rev-parse --short HEAD`, writes JSON traces to `annotation/traces/<run_id>/trace_*.json`, copies the prompt + source CSV into that same folder, and stamps the `run_id`, prompt checksum, model name, and prompt checksum into DuckDB tables (`trace_runs`, `emails_raw`).
+   - Commit your worktree (the generator refuses to run with uncommitted changes), then run `python tools/generate_email_traces.py --emails data/filtered_emails.csv [--model provider:model_id] [--workers N] [--prompt path/to/template.txt]`.
+   - The script calls the configured LLM via Pydantic AI (validated against the `SummaryPayload` schema), optionally parallelises the LLM calls (`--workers`), derives `run_id = git rev-parse --short HEAD`, writes JSON traces to `annotation/traces/<run_id>/trace_*.json`, copies the prompt + source CSV into that same folder, and stamps the `run_id`, prompt checksum, prompt path, and model name into DuckDB tables (`trace_runs`, `emails_raw`).
    - For live demos, toggle `RUN_TRACE_GENERATOR = True` inside Notebook 02 to run the same command inline.
 4. **Annotate in the Browser**
    - Launch `python tools/email_annotation_app.py` and open `http://localhost:5000`.
-   - Controls: `A` (add annotation; Enter saves, Esc cancels), `F` (link failure mode after at least one annotation), `←/→` (navigate emails), `Generate Failure Modes` (token-based suggestions). Selected failure modes appear as removable chips beneath the picker. All changes persist immediately to DuckDB—no manual save button.
+   - Controls: `A` (add annotation; Enter saves, Esc cancels), `Z` (mark pass), `X` (mark fail), `F` (link failure mode after at least one annotation), `←/→` (navigate emails), `Generate Failure Modes` (token-based suggestions). Selected failure modes appear as removable chips beneath the picker. All changes persist immediately to DuckDB—no manual save button.
 5. **Analyze in Notebook 02**
    - Choose `filtered` vs `synthetic` dataset, verify available `run_id`s, inspect DuckDB tables, review pass/fail mix, Intent × status pivots, failure-mode/intent co-occurrence, and export CSV snapshots (`EXPORT = True`).
 6. **Iterate**
