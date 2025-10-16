@@ -78,7 +78,9 @@ def load_email(run_id: str, email_hash: str) -> Optional[Dict[str, Any]]:
     metadata = trace_data.get("metadata", {}).get("extra", {})
 
     # Extract LLM output from response
-    response_content = trace_data.get("response", {}).get("messages", [{}])[0].get("content", "{}")
+    response_content = (
+        trace_data.get("response", {}).get("messages", [{}])[0].get("content", "{}")
+    )
     try:
         llm_output = json.loads(response_content)
         summary = llm_output.get("summary", "")
@@ -88,7 +90,9 @@ def load_email(run_id: str, email_hash: str) -> Optional[Dict[str, Any]]:
         commitments = []
 
     # Extract email body from request
-    request_content = trace_data.get("request", {}).get("messages", [{}])[0].get("content", "")
+    request_content = (
+        trace_data.get("request", {}).get("messages", [{}])[0].get("content", "")
+    )
     # Parse body from the prompt (it's between triple backticks)
     body_match = request_content.split("```")
     body = body_match[1].strip() if len(body_match) > 2 else ""
@@ -120,11 +124,13 @@ def list_emails(run_id: str) -> List[Dict[str, Any]]:
         if trace_data:
             metadata = trace_data.get("metadata", {}).get("extra", {})
             subject = metadata.get("normalized_subject", "").title() or "(no subject)"
-            emails.append({
-                "email_hash": email_hash,
-                "subject": subject,
-                "metadata": metadata,
-            })
+            emails.append(
+                {
+                    "email_hash": email_hash,
+                    "subject": subject,
+                    "metadata": metadata,
+                }
+            )
     return emails
 
 
@@ -414,5 +420,6 @@ def api_failure_modes_suggest():
 
 if __name__ == "__main__":
     import os
+
     port = int(os.environ.get("PORT", 5001))
     app.run(host="0.0.0.0", port=port, debug=True)

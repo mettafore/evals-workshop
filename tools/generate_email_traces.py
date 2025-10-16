@@ -25,7 +25,10 @@ from pathlib import Path
 from tqdm import tqdm
 from typing import Iterable, List, Tuple
 from concurrent.futures import ThreadPoolExecutor
+
+import pandas as pd
 from dotenv import load_dotenv
+
 load_dotenv()  # Load environment variables from a .env file if present
 
 try:
@@ -43,8 +46,6 @@ except ModuleNotFoundError as exc:  # pragma: no cover
     raise SystemExit(
         "pydantic-ai is required. Install with `pip install pydantic-ai` and configure your provider credentials before generating traces."
     ) from exc
-
-import pandas as pd
 
 # Repository-relative paths
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -140,8 +141,6 @@ def ingest_trace_run(
             artifacts.model_name,
         ),
     )
-
-
 
 
 def _fmt(value: object, default: str = "Unknown") -> str:
@@ -291,9 +290,14 @@ def process_csv(
 
         if workers > 1:
             with ThreadPoolExecutor(max_workers=workers) as pool:
-                results = list(tqdm(pool.map(summarize, jobs), total=len(jobs), desc="Summarizing"))
+                results = list(
+                    tqdm(pool.map(summarize, jobs), total=len(jobs), desc="Summarizing")
+                )
         else:
-            results = [summarize(job) for job in tqdm(jobs, desc="Summarizing", total=len(jobs))]
+            results = [
+                summarize(job)
+                for job in tqdm(jobs, desc="Summarizing", total=len(jobs))
+            ]
 
         for job, summary, commitments, prompt_text in results:
             trace_payload = create_trace_json(
