@@ -8,7 +8,8 @@ __pycache__/
 
 reference/
 reference/*
-
+emails.csv
+parsed_emails.csv
 # Distribution / packaging
 .Python
 build/
