@@ -1,0 +1,1844 @@
+file,raw_char_len,subject,normalized_subject,from_raw,from_email,to_raw,to_emails,to_count,cc_raw,cc_emails,cc_count,date_raw,body,body_char_len,body_line_count,quote_separator_count,quote_line_count,action_hit,sent_at,quote_markers,email_hash
+jones-t/notes_inbox/5055.,3038,Returned mail,returned mail,norton_antivirus_gateways@scotiacapital.com,norton_antivirus_gateways@scotiacapital.com,tana.jones@enron.com,tana.jones@enron.com,1,,,0,"Fri, 1 Jun 2001 09:58:00 -0700 (PDT)","--- The message cannot be delivered to the following address. ---
+
+garry_frederickson@intavmlr.mailservices.scm    Mailbox unknown or not 
+accepting mail.
+550 <garry_frederickson@intavmlr.mailservices.scm>... User unknown
+
+
+ - C.DTF
+Received: from sbtoradm20.ScotiaCapital.com ([192.168.107.36]) by 
+sbtormlr3.scotiacapital.com (NAVGW 2.5 bld 89) with SMTP id 
+M2001060116584103528 for <garry_frederickson@intavmlr.mailservices.scm>; Fri, 
+01 Jun 2001 16:58:41 -0400
+Received: from postmaster.enron.com ([192.152.140.9]) by 
+sbtoradm20.ScotiaCapital.com (8.9.3+Sun/8.9.3) with ESMTP id QAA17951 for 
+<garry_frederickson@scotiacapital.com>; Fri, 1 Jun 2001 16:58:41 -0400 (EDT)
+From: Tana.Jones@enron.com
+Received: from mailman.enron.com (mailman.enron.com [192.168.189.66]) by 
+postmaster.enron.com (8.10.1/8.10.1/external_corp-1.08) with ESMTP id 
+f51KwZ625042 for <garry_frederickson@scotiacapital.com>; Fri, 1 Jun 2001 
+15:58:35 -0500 (CDT)
+Received: from corp.enron.com ([192.168.110.110]) by mailman.enron.com 
+(8.10.1/8.10.1/corp-1.06) with ESMTP id f51KwZS12983 for 
+<garry_frederickson@scotiacapital.com>; Fri, 1 Jun 2001 15:58:35 -0500 (CDT)
+Received: from ene-mta01.enron.com (unverified) by corp.enron.com (Content 
+Technologies SMTPRS 4.2.1) with ESMTP id 
+<T53e11dd7ffc0a86e6e660@corp.enron.com> for 
+<garry_frederickson@scotiacapital.com>; Fri, 1 Jun 2001 15:58:35 -0500
+Subject: NDA - Scotia Capital
+To: garry_frederickson@scotiacapital.com
+Cc: Justin.Rostant@enron.com, David.Forster@enron.com,         
+Mark.Greenberg@enron.com
+X-Mailer: Lotus Notes Release 5.0.3  March 21, 2000
+Message-ID: <OFA0898B07.A2D91C69-ON86256A5E.007302C7@enron.com>
+Date: Fri, 1 Jun 2001 15:58:28 -0500
+Return-Receipt-To: Tana.Jones@enron.com
+X-MIMETrack: Serialize by Router on ENE-MTA01/Enron(Release 5.0.6 |December 
+14, 2000) at 06/01/2001 03:52:53 PM
+MIME-Version: 1.0
+Content-type: multipart/mixed ; 
+Boundary=""0__=86256A5E007302C78f9e8a93df938690918c86256A5E007302C7""
+Content-Disposition: inline
+
+At the request of David Forster, I am attaching our proposed form of
+Non-Disclosure Agreement.   Could you please confirm that we have the
+correct name of the company.  If the enclosed meets with your approval,
+please execute the agreement and return it to me via fax no. (713)
+646-3490.  I will then have it executed by Enron.  If you have any comments
+or questions please call Mark Greenberg, Senior Counsel, at (713) 345-8897
+or me at (713) 853-3399.  We look forward to hearing from you.
+
+(See attached file: scotia capital.doc)
+ - scotia capital.doc",2553,52,0,0,True,2001-06-01 16:58:00,0,ba8425d982037b65d83697eb0751b2012d705a57c080b53856585f5f27296b8e
+mann-k/discussion_threads/2918.,3470,RE: Clarksdale/Beck's comments,clarksdale/beck's comments,christi.nicolay@enron.com,christi.nicolay@enron.com,reagan.rorschach@enron.com,reagan.rorschach@enron.com,1,"kay.mann@enron.com, lloyd.will@enron.com, david.fairley@enron.com, ozzie.pagan@enron.com, bill.rust@enron.com",kay.mann@enron.com;lloyd.will@enron.com;david.fairley@enron.com;ozzie.pagan@enron.com;bill.rust@enron.com,5,"Mon, 19 Mar 2001 05:36:00 -0800 (PST)","No. 1 -- (a)  We need to clarify what ""arrange"" means.  For example, who is 
+responsible for paying for Point to Point service (which would probably be 
+needed in order to import/export power from Entergy or when sourcing/selling 
+to a non-designated resource.)  Also, there is a huge risk that PTP (or the 
+ability to add a network resource) will not be available at the time when 
+importing/exporting power is most economical.  EPMI can reserve/schedule on 
+behalf of Clarksdale, but will Clarksdale be paying for the extra 
+transmission service?  
+
+ (b)  Entergy's policies allow for a day ahead designation of network 
+resources, if transmission is available.  However, this designation is not as 
+firm as the network service that  Clarksdale will be purchasing when 
+requesting its original network.  It seems that we can state that we will not 
+impact Clarksdale's original network resource designation; however, when 
+using an alternate designation, there is the possibility that the 
+transmission could be cut before the rest of firm.  We can agree to this, but 
+lose flexibility.  I agree that we would then need the local quick start 
+generation in order to meet this request (however, such plant may not be 
+available either.)
+
+No. 6  Both of the above tie into this one (as well as the ""profit"" 
+calculation in No. 3) -- how is the ""goal"" of minimizing the resulting net 
+power supply costs measured?  EPMI will probably not be totally successful in 
+having a cost reduction 100% of the time, especially if we try to use 
+non-firm transmission at times because generally that imported/exported power 
+cost can be to their advantage.  Since the Cities will have final approval, 
+they may want to take some risk and use non-firm: understanding that 
+sometimes it won't work and the plant may have to run.  This wording also 
+needs to be clarified as to ""arrange"" -- for example, ""reserve transmission 
+on behalf of Clarksdale""; ""schedule transactions via etag on behalf of 
+Clarksdale."" 
+
+
+From: Reagan Rorschach/ENRON@enronXgate on 03/19/2001 09:38 AM
+To: Kay Mann/Corp/Enron@Enron, Lloyd Will/HOU/ECT@ECT, Christi L 
+Nicolay/HOU/ECT@ECT, David Fairley/ENRON@enronXgate, Ozzie 
+Pagan/ENRON@enronXgate
+cc:  
+
+Subject: RE: Clarksdale/Beck's comments
+
+
+
+ -----Original Message-----
+From:  Mann, Kay  
+Sent: Monday, March 19, 2001 9:37 AM
+To: Rorschach, Reagan; Will, Lloyd; Nicolay, Christi; Fairley, David; Pagan, 
+Ozzie
+Subject: Clarksdale/Beck's comments
+
+Please confirm that Beck's comments nos 1 and 6 are acceptable for the loi.  
+I would include in this email, but I don't have an electronic version with 
+me.  Reagan, if you have an electronic version, could you forward it to me?
+
+Thanks,
+
+Kay",2710,57,1,0,True,2001-03-19 13:36:00,1,0f18f192006e5047a69815928b9b8d46a1a0a23f6e21a38e8f897301ce8147c5
+campbell-l/notes_inbox/737.,3141,FREE GAMES - From Hearts to Half-Life!,free games - from hearts to half-life!,news@real-net.net,news@real-net.net,lcampbel@ect.enron.com,lcampbel@ect.enron.com,1,,,0,"Mon, 30 Apr 2001 20:25:00 -0700 (PDT)","unsubscribe at bottom
+	[IMAGE]	[IMAGE]
+	?[IMAGE]	
+[IMAGE]	[IMAGE]	[IMAGE]
+
+[IMAGE]	[IMAGE]	[IMAGE]	[IMAGE]	[IMAGE]	[IMAGE]	[IMAGE]	[IMAGE]
+				?April's Top Downloadable Games 
+				A wide variety of games in all genres - from Hearts to Half-Life
+				
+					?	?	
+?	?	?	[IMAGE]			[IMAGE]	?
+
+[IMAGE]	[IMAGE]	[IMAGE]	[IMAGE]	[IMAGE]	[IMAGE]	[IMAGE]	[IMAGE]
+				ACTION GAMES
+				Master of the Skies: The Red Ace 
+				Incredible 3D WWI dogfighting action. Fly challenging missions over France, 
+Belgium, and the sands of Africa. Incredible graphics and lots of missions.  
+A Real.com Games all-time bestseller!
+				Download Now??Watch Video
+				
+				
+						[IMAGE]
+						
+							
+				PUZZLE/BOARD GAMES
+				Hoylec Board Games 
+				Classic board games gone digital. This great suite includes 16 all-time 
+favorites, such as Backgammon, Battling Ships, Checkers, Chess, Chinese 
+Checkers, Dominoes, Line 'em Up, Mahjong Tiles and many more.
+				Download Now
+				
+				?
+						[IMAGE]
+						
+							
+				CARD/CASINO GAMES
+				Hoylec Card Games
+				No one knows cards better than Hoyle!  16 of your favorite card games, like 
+you've never seen them before. Includes Poker, Bridge, Hearts, Euchre, 
+Canasta, Crazy Eights, Cribbage, Gin Rummy, Memory Match, War, Spades, Go 
+Fish.
+				Download Now??Watch Video
+				
+				
+						[IMAGE]
+						
+							
+				STRATEGY/SIM GAMES
+				3D Ultra Pinball: Thrillride
+				Save your quarters, the best pinball action is on your PC!  The physics are  
+nearly perfect, the 3D graphics will blow your mind, and the amusement park 
+theme adds a fun twist to the classic pinball action!
+				Download Now
+				
+				
+						[IMAGE]
+						
+							
+?	?	?	?	RACING GAMES
+				Jetboat Superchamps 2 
+				Water in your face, wind in your hair, jetboat racing action!  Incredible 
+handling and physics combined with 10 different tracks master and tops speeds 
+over 200 MPH.  The sequel to the massively popular Jetboat Superchamps!
+				Download Now??Watch Video
+				
+				
+					?	[IMAGE]
+						
+							?
+?							?
+
+
+unsubscribe ??|?? terms of service ??|?? privacy policy 
+
+
+
+You are receiving this e-mail because you downloaded RealPlayer(R) or 
+RealJukebox(R) from Real.com(TM) and indicated a preference to receive 
+product news, updates, and special offers from RealNetworks(R). If you do not 
+wish to receive e-mails from us in the future, click on the Remove Me link 
+above.
+
+RealPlayer(R), RealJukebox(R), Real.com(TM), GoldPass(TM) and RealNetworks(R) 
+are trademarks or registered trademarks of RealNetworks, Inc. All other 
+companies or products listed herein are trademarks or registered trademarks 
+of their respective owners.",2643,86,0,0,True,2001-05-01 03:25:00,0,7bd653e77062b77d02aa59dc14a7a149cfb00ec120587231ee43526c0aeb4039
+hyvl-d/sent/563.,2535,AEPTA01-009.doc;AEPTE01-013.doc;PLA01002.doc;PLE01002.doc,aepta01-009.doc;aepte01-013.doc;pla01002.doc;ple01002.doc,dan.hyvl@enron.com,dan.hyvl@enron.com,edward.gottlob@enron.com,edward.gottlob@enron.com,1,,,0,"Thu, 31 May 2001 09:02:00 -0700 (PDT)","Stacey Neuweiler asked that I forward this to you so that you could print 2 
+copies of each document and give them to her boss for signature.  I have 
+reviewed the form of the agreements with Mitch Dutton and agreed that they 
+are these transporter's typical form.  If time would permit, I suggested they 
+negotiate the penalty language, otherwise the forms are okay.  Call me at 
+713-853-6895 if you have any questions.  I am also forwarding the Duke 
+documents for you to print off and have signed.  
+----- Forwarded by Dan J Hyvl/HOU/ECT on 05/31/2001 03:56 PM -----
+
+	skneuweiler@aep.com
+	05/30/2001 04:43 PM
+		 
+		 To: dan.j.hyvl@enron.com
+		 cc: 
+		 Subject: AEPTA01-009.doc;AEPTE01-013.doc;PLA01002.doc;PLE01002.doc
+
+
+
+---------------------- Forwarded by Stacey K Neuweiler/AEPIN on 05/30/2001
+05:43 PM ---------------------------
+
+
+""Bartholomew, Joyce"" <Joyce.Bartholomew@elpaso.com> on 05/15/2001 03:17:32
+PM
+
+To:   ""'skneuweiler@aep.com'"" <skneuweiler@aep.com>
+cc:
+
+Subject:  AEPTA01-009.doc;AEPTE01-013.doc;PLA01002.doc;PLE01002.doc
+
+
+ Please review and print two originals and return to:
+
+Joyce A. Bartholomew
+Greenway 4, Suite 231
+P.O. Box 4503
+Houston, Texas 77210
+
+Phone:  (832) 676-5818
+Fax:      (832) 676-1780
+Email:  joyce.bartholomew@elpaso.com
+
+
+
+******************************************************************
+This email and any files transmitted with it from the ElPaso
+Corporation are confidential and intended solely for the
+use of the individual or entity to whom they are addressed.
+If you have received this email in error please notify the
+sender.
+******************************************************************
+(See attached file: AEPTA01-009.doc)(See attached file: AEPTE01-013.doc)
+(See attached file: PLA01002.doc)(See attached file: PLE01002.doc)(See
+attached file: EPGT TPLP Op Conditions_IA_04-23-01.doc)(See attached file:
+EPGT TPLP Op Conditions_IE_ 04-23-01.doc)
+
+
+ - AEPTA01-009.doc
+ - AEPTE01-013.doc
+ - PLA01002.doc
+ - PLE01002.doc
+ - EPGT TPLP Op Conditions_IA_04-23-01.doc
+ - EPGT TPLP Op Conditions_IE_ 04-23-01.doc",2066,63,0,0,True,2001-05-31 16:02:00,0,6ad618de2f5417749b55fc5e7b83327a5a366cb5ed6a596150543a2e8205ae5f
+dasovich-j/all_documents/11822.,3076,RE: University of California/California State University,university of california/california state university,karen.denne@enron.com,karen.denne@enron.com,"jeff.dasovich@enron.com, susan.mara@enron.com, sandra.mccubbin@enron.com, paul.kaufman@enron.com",jeff.dasovich@enron.com;susan.mara@enron.com;sandra.mccubbin@enron.com;paul.kaufman@enron.com,4,,,0,"Sat, 28 Apr 2001 14:39:00 -0700 (PDT)","fyi...
+---------------------- Forwarded by Karen Denne/Corp/Enron on 04/28/2001 
+09:26 PM ---------------------------
+
+
+Peggy Mahoney@EES
+04/28/2001 05:23 PM
+To: Mark Koenig/Corp/Enron@ENRON, Paula Rieker/Enron@EnronXGate, Elizabeth 
+Ivers/Enron@EnronXGate
+cc: Karen Denne/Corp/Enron@ENRON, Mark Palmer/Corp/Enron@ENRON 
+
+Subject: RE: University of California/California State University
+
+FYI.  I will forward draft media responses (win or lose) either Sunday night 
+or Monday
+morning.  A win would mean we do not have to continue the process of 
+returning the
+campuses to our service -  as the judge ordered us to do.  A loss would mean 
+that we
+must continue returning the campuses to our service and therefore we would 
+once again
+be responsible for buying the campuses' power on the open market.   In either 
+case,
+we maintain the right to continue the appeal process, and legal will decide 
+whether or
+not it is appropriate to continue that process after the appeals court 
+decision.    
+
+Legal does not expect to hear the ruling until Tuesday morning, but there is 
+a chance we
+could hear something Monday afternoon.  
+
+Peggy 
+
+
+t---------------------- Forwarded by Peggy Mahoney/HOU/EES on 04/28/2001 
+05:07 PM ---------------------------
+From: Robert C Williams/ENRON@enronXgate on 04/27/2001 03:12 PM
+To: Robert C Williams/ENRON@enronXgate, James Derrick/ENRON@enronXgate, Mark 
+E Haedicke/HOU/ECT@ECT, Richard B Sanders/HOU/ECT@ECT, David W 
+Delainey/HOU/EES@EES, Dan Leff/HOU/EES@EES, Peggy Mahoney/HOU/EES@EES, Marty 
+Sunde/HOU/EES@EES, Greg Whalley/HOU/ECT@ECT
+cc: Vicki Sharp/HOU/EES@EES 
+Subject: RE: University of California/California State University
+
+Correction:  the time of the argument is 1:00 CST.
+
+ -----Original Message-----
+From:  Williams, Robert C.  
+Sent: Friday, April 27, 2001 2:56 PM
+To: Derrick Jr., James; Haedicke, Mark; Sanders, Richard; Delainey, David; 
+Leff, Dan; Mahoney, Peggy; Sunde, Marty; Whalley, Greg
+Cc: Sharp, Vicki
+Subject: University of California/California State University
+
+The Ninth Circuit Court of Appeals has scheduled an oral argument on Monday 
+12:00 CST on our request for a stay of the district court's order granting 
+the Universities' motion for a preliminary injunction.  The argument will be 
+by telephone, and will be heard by a three-judge panel.  Mike Smith, Dennis 
+Benevides, and I will be with counsel during the argument.  Please contact me 
+with any questions (ext. 646-6412; cell 281-414-0364).",2468,61,1,0,True,2001-04-28 21:39:00,1,d7eec8d0857d383ad4c33a65ff1c68ea78d0e70e7694bfe194e5dfc6a1303b32
+mann-k/discussion_threads/3580.,2604,FW: Signature Pages and Wire,signature pages and wire,rebecca.walker@enron.com,rebecca.walker@enron.com,kay.mann@enron.com,kay.mann@enron.com,1,,,0,"Thu, 26 Apr 2001 03:38:00 -0700 (PDT)","Kay
+
+Let me know if you would like me to help coordinate sending the 6 originals 
+to the Northwestern attorney at Paul Hastings.
+
+Thanks,
+Rebecca
+---------------------- Forwarded by Rebecca Walker/NA/Enron on 04/26/2001 
+10:37 AM ---------------------------
+
+
+""Keffer, John"" <JKeffer@KSLAW.com> on 04/26/2001 10:33:00 AM
+To: ""'rebecca.walker@enron.com'"" <rebecca.walker@enron.com>
+cc:  
+
+Subject: FW: Signature Pages and Wire
+
+
+Here's the e-mail with the signatures I sent earlier today.
+
+> -----Original Message-----
+> From: Keffer, John
+> Sent: Thursday, April 26, 2001 9:38 AM
+> To: Jeremiah A. DeBerry (E-mail)
+> Cc: C. Kay Mann (E-mail); Michael Young (E-mail); Ben F. Jacoby
+> (E-mail); Reuter, Marisa
+> Subject: Signature Pages and Wire
+>
+> Jerry-as we discussed, here are PDF files containing Enron's signature
+> pages to the Letter Agreement and the two Change Orders.  As soon as you
+> receive these, you will send to Ben, Kay and me your client's signature
+> pages to the Letter Agreement and Guarantee, and Mike will begin the wire
+> transfer of $3 million.  Mike will also send to Ben, Kay and me the Fed
+> reference number as soon as he gets it.  Finally, as agreed, Paul Hastings
+> will assemble the documents for distribution to the parties.  To that end,
+> Kay, please send the 6 originals of the signature pages by overnight
+> delivery to Jerry.
+>
+> Regards
+>
+> John L. Keffer
+> King & Spalding
+> 713 751 3255
+> 713 751 3280 (fax)
+> jkeffer@kslaw.com
+>  <<NW_ltr_agmt.pdf>>  <<co1.pdf>>  <<co2.pdf>>
+>
+>
+
+
+
+                    Confidentiality Notice
+This message is being sent by or on behalf of a lawyer.  It is intended 
+exclusively for the individual or entity to which it is addressed.  This 
+communication may contain information that is proprietary, privileged or 
+confidential or otherwise legally exempt from disclosure.  If you are not the 
+named addressee, you are not authorized to read, print, retain, copy or 
+disseminate this message or any part of it.  If you have received this 
+message in error, please notify the sender immediately by e-mail and delete 
+all copies of the message.
+
+
+ - NW_ltr_agmt.pdf
+ - co1.pdf
+ - co2.pdf",2159,65,1,28,True,2001-04-26 10:38:00,29,52e77a8d91cd761bec84c5dd3eb25638523ab2ee0be7f2065b3bf7b494adc9d4
+dasovich-j/all_documents/11999.,3774,NEWS:  California Update,news: california update,jennifer.rudolph@enron.com,jennifer.rudolph@enron.com,ca.team@enron.com,ca.team@enron.com,1,,,0,"Thu, 3 May 2001 03:33:00 -0700 (PDT)","*  from Robert Neustaeder in Govt Affairs
+
+---------------------- Forwarded by Jennifer Rudolph/HOU/EES on 05/03/2001 
+10:08 AM ---------------------------
+
+
+Robert Neustaedter@ENRON_DEVELOPMENT
+04/30/2001 06:02 PM
+To: Jennifer Rudolph/HOU/EES@EES
+cc:  
+Subject: California Update
+
+Jennifer,
+
+Just a bit of an update with regard to California regulatory and legislative 
+issues brought up in the Govt. Affair conference call.
+
+Edison transmission sale - Serious problems being encountered with 
+legislation dealing with government purchase of SCE transmission assets.  
+Both democrats and republicans are having problems with the Governor's 
+proposal.
+
+Hearings are being held this week on the windfall profit tax bill (SB1X).  Of 
+note, Intergen is expected to testify that if the bill is passed it will not 
+go forward with plans to build a power plant within the state.
+
+
+
+
+
+
+
+.? Divided FERC Approves Price Mitigation for Spot Market in California. 
+Following more than a nine-hour delay for the Commission meeting this week, 
+the divided FERC voted out a controversial market monitoring and mitigation 
+plan. FERC approved a plan that will establish a single-market clearing price 
+auction for real-time transactions in the Cal-ISO during times of reserve 
+deficiencies in the state. 
+???????? During Stage I, II, and III emergencies, real-time transactions will 
+be based on a proxy price tied to natural gas prices.
+???????? Each generator, through a participating generator agreement, is 
+required to offer all available power and bid its marginal cost based on the 
+generator's heat curve, emission rates, gas costs and emission costs plus $2 
+for O&M.
+???????? Gas cost will be the average daily cost of gas for all delivery 
+points into California. 
+???????? FERC opened Section 206 investigation to determine whether bulk 
+power prices in West are just/reasonable, but only applies to prices on 
+transactions for 24 hours or less during emergencies.
+???????? Cal-ISO must submit RTO proposal by June 1. If it fails to do so, 
+the state will lose its mitigation plan completely
+???????? Massey took issue with the offer of price mitigation during 
+emergencies; further criticized the provision on refunds as too narrow; 
+believes FERC should concentrate more on prices for gas, considering the 
+growing use to fuel power generation
+???????? The order expires one year from date of issuance. 
+???????? Enron's read on the order is that price caps won't help the state's 
+problems; they will neither increase supply nor decrease demand. 
+?
+13.? In a related development, the California State Assembly passed a joint 
+resolution urging FERC to place a ""cost-based rate cap on natural gas coming 
+into the state over the next 18 months. The resolution goes on to the State 
+Senate where it is expected to pass, and then formally sent to the federal 
+regulators.
+?
+14.? New RTO Accepted by FERC For Western States. FERC issued an order 
+accepting a new RTO, RTO West, that includes Avista Corporation, Bonneville 
+Power Administration, Idaho Power Company, Montana Power Company, Nevada 
+Power Company, PacifiCorp, Portland General Electric Company, Puget Sound 
+Energy and Sierra Pacific Power. RTO West will operate more than 90% of the 
+high voltage transmission from the Canadian border into southern Nevada.",3318,71,0,0,True,2001-05-03 10:33:00,0,3d66be1ccfb486ab7d81fd96336f7fb7426b53de23cb5165c4d9f7398bbcecc5
+symes-k/corporate_comm/244.,2822,SUPPLEMENTAL Weekend Outage Report for 4-20-01 through 4-23-01,supplemental weekend outage report for 4-20-01 through 4-23-01,enron.announcements@enron.com,enron.announcements@enron.com,houston.report@enron.com,houston.report@enron.com,1,,,0,"Fri, 20 Apr 2001 09:37:00 -0700 (PDT)","------------------------------------------------------------------------------
+------------------------
+W E E K E N D   S Y S T E M S   A V A I L A B I L I T Y
+
+F O R
+
+April 20, 2001 5:00pm through April 23, 2001 12:00am
+------------------------------------------------------------------------------
+------------------------
+                    
+SCHEDULED SYSTEM OUTAGES: 
+
+ARDMORE DATA CENTER - FACILITY OPERATIONS: No Scheduled Outages.
+
+AZURIX: No Scheduled Outages.
+
+EB34 DATA CENTER - FACILITY OPERATIONS: No Scheduled Outages.
+
+EDI SERVER: No Scheduled Outages.
+
+ENRON NORTH AMERICAN LANS:      SEE ORIGINAL REPORT
+ 
+FIELD SERVICES:  No Scheduled Outages.
+
+INTERNET: No Scheduled Outages.
+
+MESSAGING:     SEE ORIGINAL REPORT
+ 
+MARKET DATA: No Scheduled Outages.
+
+NT: No Scheduled Outages.
+
+OS/2:  No Scheduled Outages.
+
+OTHER SYSTEMS:        ALSO SEE ORIGINAL REPORT 
+Impact:  CORP
+Time:  Fri 4/20/2001 at  5:00:00 PM CT thru Mon 4/23/2001 at  8:00:00 AM CT
+ Fri 4/20/2001 at  3:00:00 PM PT thru Mon 4/23/2001 at  6:00:00 AM PT
+ Fri 4/20/2001 at  11:00:00 PM London thru Mon 4/23/2001 at  2:00:00 PM London
+Outage:  SysAdmiral Maintenance
+Environments Impacted:  SysAdmiral Users
+Purpose: SysAdmiral terminal server icons on General Cluster will not be 
+available due to maintenance. 
+Once the maintenance is completed the icons will point to the new 2.3.11 
+production and development environments.
+Backout:  None
+Contact(s):  Rusty Cheves  713-345-3798        
+ 
+SITARA:  No Scheduled Outages.
+
+SUN/OSS SYSTEM: No Scheduled Outages.
+
+TELEPHONY: No Scheduled Outages
+
+TERMINAL SERVER:  No Scheduled Outages.
+
+UNIFY:       SEE ORIGINAL REPORT  
+ 
+------------------------------------------------------------------------------
+-----------------------------------------------
+        FOR ASSISTANCE
+
+(713) 853-1411   Enron Resolution Center
+
+
+Specific Help:
+Information Risk Management   (713) 853-5536
+SAP/ISC                                                                       
+        (713) 345-4727
+Unify On-Call      (713) 284-3757  [Pager]
+Sitara On-Call     (713) 288-0101  [Pager]
+RUS/GOPS/GeoTools/APRS   (713) 639-9726  [Pager]
+OSS/UA4/TARP    (713) 285-3165  [Pager]
+CPR      (713) 284-4175  [Pager]
+EDI Support      (713) 327-3893  [Pager]
+EES Help Desk     (713)853-9797 OR (888)853-9797",2306,76,0,0,True,2001-04-20 16:37:00,0,785163c3fa45891c59de7d707a76e63e321793b5d52a540516a671f8d4c9858d
+campbell-l/discussion_threads/1596.,2554,NYISO - BSP Subcommittee Meetings to Address Credit Policy,nyiso - bsp subcommittee meetings to address credit policy,owner-nyiso_tech_exchange@lists.thebiz.net,owner-nyiso_tech_exchange@lists.thebiz.net,tie_list_server.nyiso@nyiso.com,tie_list_server.nyiso@nyiso.com,1,,,0,"Tue, 15 May 2001 02:55:00 -0700 (PDT)","ddechiaro@nyiso.com writes to the NYISO_TECH_EXCHANGE Discussion List:
+
+
+The Credit Policy Working Group, which has been assigned by the Budget,
+Standards, and Performance Subcommittee to address the details necessary to
+develop a NYISO Credit Policy, I believe is converging on a proposal that I
+expect will be drafted and available from NYISO staff by May 18.  Since the
+BSP has been assigned by the Management Committee to recommend a credit
+policy, the full BSP needs to review this proposal and attempt to reach a
+consensus position to recommend to the Management Committee at its June 6
+meeting.  Absent that, we need to able to present majority and minority
+proposals.
+
+In anticipation of this proposal being available May 18, and consistent
+with the goal of presenting a recommendation to the Management Committee
+for a vote at its June 6 meeting, I am scheduling two BSP meetings (in
+addition to the May 21 which is to address business planning goals).
+
+The first meeting will be Tuesday, May 22, 2001, starting at 9:30 AM in
+Conference Room ""WA"" at the NYISO offices on Washington Avenue Extension in
+Albany.  You are encouraged to participate in person since NYISO staff will
+be presenting the details of the proposal, however, the following call-in
+number is available for those who cannot be there:
+
+Dial In Number:          (505) 242-2420
+
+Participant Code:   265727
+
+A second meeting is scheduled for Wednesday, May 30, 2001, starting at 9:30
+AM in Conference Room ""WA"" at the NYISO offices on Washington Avenue
+Extension in Albany to finalize our recommendation(s) to Management
+Committee.  (If we can achieve this on May 22, this meeting will not be
+needed.  I've been at this too long, however, to expect that will be the
+case.)  Again, in person attendance is preferred, however, the following
+call-in number will be available.  Same number as the first meeting:
+
+Dial In Number:          (505) 242-2420
+
+Participant Code:   265727
+
+Marty Amati
+Chair, BSP Subcommittee",1987,42,0,0,True,2001-05-15 09:55:00,0,8258a2e0bbb4b773d9bc0afbd1126d64e22afb9411e004b71496c12a9b519b1a
+kean-s/sent/1517.,2369,Re: Gas Controller's Association speaker (California Energy Crisis),gas controller's association speaker (california energy crisis),steven.kean@enron.com,steven.kean@enron.com,sherri.sera@enron.com,sherri.sera@enron.com,1,maureen.mcvicker@enron.com,maureen.mcvicker@enron.com,1,"Wed, 14 Mar 2001 09:09:00 -0800 (PST)","I can do it, but have to be at the airport before 2:00 for a flight to NY.
+
+
+
+	Sherri Sera
+	03/14/2001 04:17 PM
+		 
+		 To: Steven J Kean/NA/Enron@Enron
+		 cc: Maureen McVicker/NA/Enron@Enron, Mary Poorman/NA/Enron@Enron
+		 Subject: Gas Controller's Association speaker (California Energy Crisis)
+
+Steve, Jeff will be in Boston on this date doing 1:1s following 1Q earnings 
+release.  Is this something you would be interested in/available to do?  If 
+not, who would you recommend sending it to?  Thanks, SRS
+---------------------- Forwarded by Sherri Sera/Corp/Enron on 03/14/2001 
+04:16 PM ---------------------------
+
+
+Mary Poorman
+03/14/2001 03:14 PM
+To: Jeff Skilling/Corp/Enron@ENRON
+cc:  
+
+Subject: Gas Controller's Association speaker (California Energy Crisis)
+
+The Gas Controller's Association, of which I am the Assistant Secretary, is 
+holding a meeting on April 19th at the Gulf South (Koch) Building.  We would 
+like to present a speaker who can educate our members on the California 
+Energy Crisis, and discuss/present any of the proposed solutions thereto.   
+We would appreciate it if you could carve some time out of your very busy 
+schedule.  If you are unable to make any commitments, could you recommend 
+someone within the organization who would be as well-versed on the topic?
+
+About our organization:
+
+The mission statement of the GCA is to ""create an environment that 
+facilitates the exchange of current and practical information, while 
+enhancing relationships and promoting goodwill between operating, scheduling, 
+distribution, and others involved in the process of
+moving natural gas.""  In addition, the GCA provides scholarships to students 
+who plan to obtain a degree in a field deemed to be 
+""industry related"" from local area high schools.
+
+Thank you for your time,
+
+Mary Poorman",1813,46,0,0,True,2001-03-14 17:09:00,0,b800fffb2ae46b109d13f9e8a90cdaccfafc825193890d3d62c12efebd89bcbb
+stclair-c/all_documents/2315.,1651,Enron - Select MPPSA,enron - select mppsa,janice.moore@enron.com,janice.moore@enron.com,carol.clair@enron.com,carol.clair@enron.com,1,,,0,"Fri, 4 May 2001 02:43:00 -0700 (PDT)","I can't remember whether I sent this to you or not.  I included these things 
+in the redraft I sent out on 5/2 (copied you on that note to Phyllis). 
+Regards,
+Janice
+
+EB3861
+Assistant General Counsel, Enron North America Corp.
+713-853-1794 (Fax:  713-646-4842)
+----- Forwarded by Janice R Moore/HOU/ECT on 05/04/2001 09:43 AM -----
+
+	lemelpe@NU.COM
+	05/02/2001 02:03 PM
+		 
+		 To: janice.r.moore@enron.com
+		 cc: morisjr@selectenergy.com
+		 Subject: Enron - Select MPPSA
+
+
+Janice - To follow up on this morning's phone call, I propose the following
+language:
+
+In the Cover Sheet, Article Five, 5.6 Closeout Setoff, we would check off
+Option B, and specify that, for purposes of this section only, Affiliates
+of Party B shall only include subsidiaries of Northeast Utilities
+Enterprises, Inc.
+
+In the Other Changes section dealing with Confidentiality, I suggest adding
+a sentence before the last one in the paragraph, that states:  ""For
+purposes of this section only, Affiliates of Party B shall not include The
+Connecticut Light and Power Company, Western Massachusetts Electric
+Company, and Public Service Company of New Hampshire.""
+
+I look forward to reviewing the re-draft of the MPPSA.
+
+Phyllis Lemell",1206,35,0,0,True,2001-05-04 09:43:00,0,34db990034f76595b115eebabc78717194e145e248715f207a907f072ea31c24
+mann-k/all_documents/5505.,2580,Re: CA for Island End Project and Meeting Scheduled for 5/15/01,ca for island end project and meeting scheduled for 5/15/01,kay.mann@enron.com,kay.mann@enron.com,john.llodra@enron.com,john.llodra@enron.com,1,kathleen.carnahan@enron.com,kathleen.carnahan@enron.com,1,"Wed, 9 May 2001 11:12:00 -0700 (PDT)","Hi John,
+
+I left you a voice mail, but thought I'd try email as well.
+
+The language that they added to paragraph 6 raises some issues since they 
+want to restrict ENA and its affiliates from future potential transactions.  
+Please call me at your convenience to discuss.
+
+Thanks,
+
+Kay
+
+
+
+
+John Llodra
+05/09/2001 03:10 PM
+To: Kay Mann/Corp/Enron@Enron, Kathleen Carnahan/NA/Enron@Enron
+cc:  
+
+Subject: CA for Island End Project and Meeting Scheduled for 5/15/01
+
+Kay/Kathleen
+
+Please see Ameresco's attached markup of our 2-way CA.  If you would like a 
+redline please let me know and I can see if they can send one.  We have a 
+meeting next Tuesday and will need to begin to share info prior to that, so I 
+would like to get this wrapped up as soon as possible.  Thanks so much for 
+your help
+
+Regards
+John
+
+
+---------------------- Forwarded by John Llodra/Corp/Enron on 05/09/2001 
+04:08 PM ---------------------------
+
+
+""Barba, Doug"" <dbarba@ameresco.com> on 05/09/2001 02:19:36 PM
+To: ""'john.llodra@enron.com'"" <john.llodra@enron.com>
+cc: ""Corrsin, David"" <dcorrsin@ameresco.com>, ""Wallis, Peter""  
+<pwallis@ameresco.com> 
+
+Subject: CA for Island End Project and Meeting Scheduled for 5/15/01
+
+
+
+
+John, 
+
+Attached is a CA that Ameresco is prepared to sign.? Once Enron has reviewed, 
+then I will send 2 signed CA's with one original returned to Ameresco.? The 
+meeting is confirmed with Joe Murphy at Cabot.? I believe he will have one or 
+more people attend the meeting and he has asked the names of persons that 
+will be attending.? Please let me know who from Houston besides yourself will 
+be at the meeting.? I also want to have a conference call with Gil or Dave 
+plus yourself to discuss strategy prior to us getting together next week.
+
+ <<Enron Bilateral CA Draft 2 by Ameresco 050901.doc>> 
+
+Doug Barba 
+Executive Vice President 
+Ameresco Inc. 
+111 Speen Street 
+Framingham, MA? 01701 
+Phone: 508-661-2238 
+Fax: 508-661-2201 
+E-mail: dbarba@ameresco.com 
+
+ - Enron Bilateral CA Draft 2 by Ameresco 050901.doc",2021,70,0,0,True,2001-05-09 18:12:00,0,c63aa6e33ada527ae77c31c4d53ff143a2dfd61a619de239c0a918579e02cd39
+shackleton-s/all_documents/11025.,1706,RE: Sempra,sempra,sara.shackleton@enron.com,sara.shackleton@enron.com,brent.hendry@enron.com,brent.hendry@enron.com,1,,,0,"Tue, 15 May 2001 02:41:00 -0700 (PDT)","FYI
+
+Sara Shackleton
+Enron North America Corp.
+1400 Smith Street, EB 3801a
+Houston, Texas  77002
+713-853-5620 (phone)
+713-646-3490 (fax)
+sara.shackleton@enron.com
+----- Forwarded by Sara Shackleton/HOU/ECT on 05/15/2001 09:40 AM -----
+
+	Celeste Cisneros/ENRON@enronXgate
+	05/10/2001 09:43 AM
+		 
+		 To: Sara Shackleton/HOU/ECT@ECT
+		 cc: 
+		 Subject: RE: Sempra
+
+Hi Sara.  I can't find in my email system what our conversations were after 
+this.  Did you get a chance to respond?  If so, please advise.  Thanks.
+
+ -----Original Message-----
+From:  Cisneros, Celeste  
+Sent: Thursday, April 26, 2001 2:28 PM
+To: Shackleton, Sara
+Subject: FW: Sempra
+
+Sara, the weather group is wanting to get Sempra prepared to do weather 
+trades, how should we proceed?
+
+ -----Original Message-----
+From:  St Clair, Carol  
+Sent: Thursday, April 26, 2001 2:23 PM
+To: Cisneros, Celeste
+Subject: Sempra
+
+Celeste:
+I think that we need to execute an ISDA to do weather trades with Sempra as 
+the 2/22/96 Agreement appears to only work for commodity trades.  If this 
+needs to be pursued further, please have someone contact Sara Shackleton as I 
+am moving to the power group.  Thanks.
+
+Carol St. Clair
+EB 3889
+713-853-3989 (Phone)
+713-646-3393 (Fax)
+carol.st.clair@enron.com",1253,47,2,0,True,2001-05-15 09:41:00,2,bd1874b01786b102fa839407d9217995c98d0a1e83df865a0ddc01931f2a8abc
+mcconnell-m/discussion_threads/639.,4324,Chase/JP Morgan Meeting on Financing Methanol Project,chase/jp morgan meeting on financing methanol project,james.lewis@enron.com,james.lewis@enron.com,"mike.mcconnell@enron.com, jeffrey.shankman@enron.com",mike.mcconnell@enron.com;jeffrey.shankman@enron.com,2,"john.nowlan@enron.com, larry.lawyer@enron.com",john.nowlan@enron.com;larry.lawyer@enron.com,2,"Sun, 3 Jun 2001 15:31:00 -0700 (PDT)","Mike and Jeff,
+
+This note is to update you on information we have related to the GTL Methanol 
+project in Darwin, Australia.
+
+Larry, John and I met with Chase/JP Morgan, specifically, the banker who led 
+the financing of the Titan Methanol Plant in Trinidad. We wanted to get an 
+independent opinion on the financeability of the current GTL structure and 
+insights into the current market for project bank debt for commodity deals.
+
+The key opinion of Steve Nordaker, the Chase banker on the Titan deal, was 
+that project banks do not take commodity price risk unless they have a very 
+clear, supportable view of the long-term market price for that commodity. As 
+for methanol, with the high level of uncertainty about the demand and price 
+for methanol as tied to the future of MTBE, Steve said that Chase would need 
+a profit margin contractually guaranteed by the project documents before 
+lending to a project. Steve further suggested that if the gas supply contract 
+had a floating price tied to methanol prices with a floor price, that floor 
+should be around $0.50/ mmbtu to give the lenders comfort that the plant 
+would remain competitive over the years required to repay the debt. GTL has 
+agreed to a fixed price of $1.02/mmbtu with Phillips. Chase would not lend to 
+the Darwin Methanol project as structured with a fixed price for the gas 
+input and an index price for the methanol off take. Nordaker thought that it 
+would be very hard to find even one bank to take the unhedged risk on the 
+methanol margin. In fact, GTL will need at least ten banks to raise the full 
+$250 million of senior project debt.
+
+Another key risk that Chase would not take is the strength of the Sponsor, in 
+this case GTL. GTL has a total market cap of approx. $30 million. It will 
+have to issue new shares equal in value to more than its current market cap 
+to fund its portion of the project equity. If the project experiences cost 
+overruns, the Lenders will expect someone with a high credit rating or 
+demonstrable financial strength to invest whatever amount is needed to finish 
+construction. 
+
+I think that GTL is taking a big risk of wasting several months before 
+finding out that its project is not financeable. In addition to the waste of 
+time, GTL will have signed a gas supply agreement that will have to be 
+renegotiated, and other key documents may need to be amended. EGM will not 
+get the methanol it wants on time and may be faced with the choice of 1) 
+taking on extra methanol price risk (by agreeing to buy more of the plant's 
+output at a fixed price or by providing sponsor support) or 2) dropping out 
+of the deal. If we have hedged some risk in anticipation of the project 
+succeeding, then we will face pressure to take on more risk to cover the 
+hedges.
+
+I think that GTL's deal is fixable, and John wants the methanol. I, 
+therefore, recommend that we push GTL on several key structural elements so 
+that GTL achieves a feasible project and so that EGM receives its methanol on 
+time. Because EGM is only willing to buy 1/3 of the plant's production of 
+methanol at a fixed price, the most important point is to get Phillips to 
+agree to a floating gas price. Kevin Alexander of GTL says that they have 
+tried, but that Phillips would not accept it. If necessary, we should offer 
+to intervene with Phillips. We will, also, try to keep GTL realistic on the 
+time it takes to negotiate project documents (six to nine months) and to 
+issue public equity (no limit if the markets turn bad).
+
+John, Larry and I are developing a plan to move GTL to a realistic structure. 
+We may need your help with Phillips. We will keep you apprised. 
+
+Jim",3661,61,0,0,True,2001-06-03 22:31:00,0,32da6e01f286b61fb014bb6befd8bf301100f042c0f76ff185dbad69ebee4d54
+haedicke-m/all_documents/1282.,3586,Legal Risks - QLR,legal risks - qlr,peter.keohane@enron.com,peter.keohane@enron.com,mark.haedicke@enron.com,mark.haedicke@enron.com,1,"chris.gaffney@enron.com, greg.johnston@enron.com, mark.powell@enron.com",chris.gaffney@enron.com;greg.johnston@enron.com;mark.powell@enron.com,3,"Mon, 28 May 2001 03:23:00 -0700 (PDT)","Mark, as we discussed, I see one of the growing legal risks for Canada (and 
+perhaps elsewhere) resulting from ""retail"" deregulation and the pressure to 
+increase transaction flow/market scope in energy markets by transacting 
+behind and through the distribution company (or at ""point of delivery"").  
+Although generally speaking this is described as ""retail"", it also affects 
+""wholesale"" as (i) EWS will manage risk for EES, and (ii) the distinctions 
+between ""retail"" and ""wholesale"" are not always clear (ex. depending on size 
+and complexity, traders/originators in EWS will do ""point of delivery"" 
+transactions).  
+
+The risks tend to be additional to the customary commodity, price, legal and 
+credit risk management in wholesale transactions, as they also involve: (i) 
+volume/load balancing risk between the counterparty and the Disco, 
+particularly for ""all requirements"", ""use"" or ""load following"" transactions 
+and particularly where the balancing obligation between the counterparty and 
+the Disco is ""unhedged"" or ""mismatched"" (ex. balancing with the counterparty 
+for excess or unused volumes may be at daily index on the date of 
+consumption, whereas balancing with the Disco may be at the monthly index for 
+the next month based on actual, estimated or aggregated data); (ii) terms and 
+conditions/tariff risk to the Disco (ex. the distribution terms and 
+conditions/tariffs pass a number of risks on to the commodity supplier, such 
+as obligations to continue delivery after counterparty default or 
+termination, options to the Disco to source supply after default or 
+termination, broad third party indemnifications to the Disco for conduct of 
+the counterparty, allocation of force majeure risk (that may differ from the 
+counterparty agreement); (iii) additional or incremental credit obligations 
+to the Disco; and (iv) pressure in these markets to used more simplified 
+(often government regulated) non-master contract forms - although the forms 
+used tend to be more unilateral to the commodity supplier.
+
+The mitigant is to understand clearly both the formal and practical market, 
+rules, requirements, procedures, regulations and distribution terms and 
+conditions applicable to delivering the commodity behind and through the 
+Disco, if possible to get involved in shaping those in a proactive way 
+through the deregulation process, and developing risk management procedures 
+around the formal and practical requirements of the market.
+
+For your risk memo you could briefly describe the risk as:  ""Point of 
+Delivery Risk (retail or wholesale) for energy commodities behind and through 
+the Distribution Company, including balancing commodity use between the Disco 
+and the customer, distribution tariff/terms and conditions risks, incremental 
+credit obligations between wholesale markets and the Disco, and commercial 
+and regulatory requirements for contracting."" 
+
+Please call if you want to discuss further.  Peter.",2946,45,0,0,True,2001-05-28 10:23:00,0,5d22d9e7dc49193f2584c4af2674ebee1c42b4cce2ce7f714bfd75522e2eb5e1
+sanders-r/all_documents/1971.,2932,Re: Litigation Counsel Approval - Lakeside Packers,litigation counsel approval - lakeside packers,richard.sanders@enron.com,richard.sanders@enron.com,peter.keohane@enron.com,peter.keohane@enron.com,1,,,0,"Fri, 11 May 2001 07:59:00 -0700 (PDT)","Is it too late to take credit for this?
+
+
+
+	Peter Keohane
+	05/11/2001 02:35 PM
+		 
+		 To: James Derrick/Enron@EnronXGate, Mark E Haedicke/HOU/ECT@ECT, Richard B 
+Sanders/HOU/ECT@ECT
+		 cc: Mark Taylor/HOU/ECT@ECT, Greg Johnston/CAL/ECT@ECT
+		 Subject: Litigation Counsel Approval - Lakeside Packers
+
+FYI, following-up on this matter, after discussing the matter with their 
+counsel and confronted with a $3.5MM lawsuit, Lakeside acknowledged the deal 
+and executed our paper.  Regards, Peter.
+---------------------- Forwarded by Peter Keohane/CAL/ECT on 05/11/2001 01:25 
+PM ---------------------------
+   
+	Enron Capital & Trade Resources 
+	Canada Corp. 
+	
+	From:  Peter Keohane                           04/30/2001 10:26 AM
+	
+
+To: James Derrick/Enron@EnronXGate, Mark E Haedicke/HOU/ECT@ECT, Richard B 
+Sanders/HOU/ECT@ECT
+cc: Mark Taylor/HOU/ECT@ECT, Greg Johnston/CAL/ECT@ECT, Sharon 
+Crawford/CAL/ECT@ECT 
+Subject: Litigation Counsel Approval - Lakeside Packers
+
+We have a counterparty (Lakeside Packers) who refuses to perform to a 5 year 
+fixed for floating power swap which commenced Jan. 01 and is C$2.5MM 
+(US$1.7MM) in the money to us and booked (we would take a hit to earnings by 
+that amount to unwind the deal).  Unfortunately, without the involvement of 
+Legal, the deal was executed without paper, but on the basis that it was 
+subject to our standard ISDA documentation.  The Confirm was sent out on that 
+basis but not executed by the counterparty.  There was some agreement on 
+guarantee support, but as this was less clear to get the underlying deal put 
+in place, with the approval of Credit, we gave up the requirement for the 
+guarantee in our subsequent discussions and demand letter.
+
+We want to pursue the matter by commencing litigation.
+
+Lakeside is traditionally represented by Blakes.
+
+My suggestion would be to use the Duncan McCachen firm, a litigation boutique 
+who we have used in the past (CIBC litigation).  Mike McCachen has a good 
+understanding of the trading business for a litigation lawyer.  
+Alternatively, I would suggest Clarke Hunter of Macleod Dixon who is 
+currently representing us on the NGX litigation and who also has a good 
+understanding of out trading business.  Mike is a little more aggressive than 
+Clarke, to my preference.
+
+We would like to proceed as soon as possible as our demand letter expired 
+last week, and our calls this morning were not dealt with satisfactorily.
+
+Peter.",2441,57,0,0,True,2001-05-11 14:59:00,0,8b4a3bb30f3605db332c10d7f88d5789e4a69e3baabdb811a9ede247ee5bb344
+salisbury-h/read/179.,2367,Control Area Reserves,control area reserves,bill.iii@enron.com,bill.iii@enron.com,portland.shift@enron.com,portland.shift@enron.com,1,,,0,"Mon, 30 Apr 2001 14:12:00 -0700 (PDT)","Just wanted to make sure you saw this from Les Rawson concerning Grays Harbor and Willamette.
+-Bill
+
+Beginning immediately Enron has purchased Control Area Reserves service from BPA. 
+
+The allows Services to sell Unit contingent energy as hourly firm since BPA is suppling reserves for up to 60 Minutes. If Grays Harbor Paper notifies RT of a unit derate or outage RT should notify BPA dispatch immediately and make the reduction in the schedule during the next ramp. For example should Grays unit trip as 1333 RT would notify BPA and the sink that across the top of the hour for 1400 the schedule would be taken to zero for HE 1400. The bottom line is that 60 minutes is the maximum time BPA will carry the schedule.
+
+Send me a e-mail concerning any reductions for Grays since the energy would need to be repaid back within 168 hours.
+
+Also, for May Services sold 10 mw of UC energy to EWEB from Willamette all hours. As part of this sale Services bought 18 Mw of firm transmission from PACW to BPAT for all hours. 10Mw of this purchase will be used for the monthly sale with the remaining 8Mw used for day ahead and hourly sales. The Assignment Reference # 139990. The cost for this transmission is $2.72 per hour vs the $5.84 we normally pay for hourly non-firm so hopefully we can save some money on PAC transmission.
+
+Also, beginning May 1 Services purchased Ancillary Services from PacifiCorp to allow Willamette's Unit Contingent energy to be sold as 1-hour firm with reserves. The procedure for dealing with inner hour cuts is similar to Grays with the exception of not calling PAC RT dispatch. Simply cut or reduce the schedule at the next ramp and note the derate in a e-mail to Services. This service adds .43 cents per Mw to the term sale costs. However, this service applies to Willamette's sales up to 30Mw.
+
+Let me know if there are questions.
+
+Les",1863,16,0,0,True,2001-04-30 21:12:00,0,e26f79b85df1c155817ac65cda9110214380e4ef6d2c7ab5da97c2240aa42468
+lavorato-j/deleted_items/89.,2769,FW: Crown Energy,crown energy,lydecker.jr.@enron.com,lydecker.jr.@enron.com,jeff.skilling@enron.com,jeff.skilling@enron.com,1,"brian.redmond@enron.com, louise.kitchen@enron.com, john.lavorato@enron.com",brian.redmond@enron.com;louise.kitchen@enron.com;john.lavorato@enron.com,3,"Tue, 29 May 2001 15:01:39 -0700 (PDT)","Oscar Wyatt and Tom Bachtell have agreed with our recommendation to hold off doing anything pending the results of the MCN/MCNIC arbitration scheduled July 23 - August 10.
+
+They also were unaware that our convertible preferred was non-voting which effectively ruled out doing anything at the June shareholder meeting along the lines they were considering since the record date has passed.
+
+ -----Original Message-----
+From: 	Lydecker Jr., Richard  
+Sent:	Friday, May 11, 2001 5:15 PM
+To:	Skilling, Jeff
+Cc:	Redmond, Brian; Kitchen, Louise; Lavorato, John
+Subject:	Crown Energy
+
+I spoke with Oscar Wyatt this afternoon on Crown and subsequently to Tom Bachtell, an attorney in Utah who is attempting to organize shareholders to replace existing management.  Crown has an asphalt oil sand production facility in northeast Utah and an asphalt distribution company.  Bachtell owns about 4-5% of the stock.  Mr. Wyatt indicated he had a ""small"" holding.  I indicated that we would consider any proposal that might result in salvaging some value from this investment.
+
+We hold convertible preferred and a small amount of common at an original cost of $5.5 million in 1997.  Fully converted, our ownership would be approximately 25%.  The Company has a net deficit of $21 million and a ""going concern"" paragraph in its audit opinion.  We have written down our carrying value to nil.
+
+The Company in engaged in an arbitration proceeding against MCN Energy and MCNIC Pipeline.  MCNIC has interests in the asphalt assets and is a lender to Crown.  MCNIC attempted to foreclose on certain Crown assets and Crown in turn counter-sued for $100 million.  The arbitration hearing will be held July 23 - August 10.  If Crown obtained an award from the arbitration, some value could be restored to our investment.
+
+We will get further information from Bachtell on the details of his plans and recommend what position Enron should take in this matter.",1933,18,1,0,True,2001-05-29 22:01:39,1,85e642ba88c249d1e56d0c76049a8a02c2be727bbf8b302530cda42aa78a1e82
+sanders-r/all_documents/2012.,3395,CalPX Participants' Committee - possible joinder in PGE motion	re ratepayers committee,calpx participants' committee - possible joinder in pge motion re ratepayers committee,richard.sanders@enron.com,richard.sanders@enron.com,"lisa.mellencamp@enron.com, michael.tribolet@enron.com",lisa.mellencamp@enron.com;michael.tribolet@enron.com,2,,,0,"Wed, 16 May 2001 01:35:00 -0700 (PDT)","What position should I take?
+----- Forwarded by Richard B Sanders/HOU/ECT on 05/16/2001 08:34 AM -----
+
+	""Jeffrey A. Krieger"" <jkrieger@ggfcmk.com>
+	05/15/2001 11:42 PM
+		 
+		 To: <pgurfein@akingump.com>, <jcrossen@apx.com>, <rberry@apx.com>, 
+<rich.stevens@avistacorp.com>, <david.burns@bakerbotts.com>, 
+<doug.anderson@calenergy.com>, <dag@dgdk.com>, <rkd@dgdk.com>, 
+<richard.b.sanders@enron.com>, ""Anne Marie DeFelice"" <adefelice@ggfcmk.com>, 
+""Cindy Stremmel"" <cstremmel@ggfcmk.com>, ""Garrett L. Hanken"" 
+<ghanken@ggfcmk.com>, ""Jeffrey A. Krieger"" <jkrieger@ggfcmk.com>, ""Marc S. 
+Cohen"" <mcohen@ggfcmk.com>, <kjohan@ladwp.com>, <ceklund@llgm.com>, 
+<dwhitley@llgm.com>, <jrnelson@llgm.com>, <mlubic@mdbe.com>, 
+<zack.starbird@mirant.com>, <pmar@mofo.com>, <hweg@pgwlaw.com>, 
+<david.facey@powerex.com>, <teresa.conway@powerex.com>, 
+<rbeitler@sempratrading.com>, <awells@stroock.com>, <ayudkowsky@stroock.com>, 
+<pjazayeri@stroock.com>, <bholman@whitecase.com>
+		 cc: 
+		 Subject: CalPX Participants' Committee - possible joinder in PGE motion re 
+ratepayers committee
+
+
+To: CalPX Participants' Committee
+
+Howard Weg has asked that I poll the committee members because several 
+members of the committee have advised that they believe we should take a 
+position supporting PG&E's motion to vacate the UST's appointment of a 
+Ratepayers' committee in the PG&E bankruptcy case.  The idea is to file a 
+brief joinder stating that the Participants' Committee in the CalPX case, 
+representing constituents which are the real parties in interest of over $1.9 
+billion in claims against PG&E, as scheduled by PG&E in its list of 20 
+largest creditors, supports the motion and the joinder filed by the PG&E 
+creditors' committee.  Our joinder would state that there is no statutory 
+basis for appointing a ratepayers' committee and that it is not in the best 
+interest of the estate.  We might also indicate that we agree with PGE and 
+the PGE creditors' committee that there are other means for ratepayers to be 
+heard which make more sense than giving them official committee status.  We 
+would also appear telephonically at the hearing, this Friday, at 10 a.m.
+
+Please let me know as soon as possible if you would like a conference call on 
+this issue.  Also, please let me know as soon as possible if you object to 
+the committee taking this position.
+
+Thank you.
+
+Jeffrey A. Krieger
+(310) 785-6869
+
+www.ggfcmk.com
+
+
+
+**************************
+* Confidentiality Notice *
+**************************
+
+This message is intended solely for the use of the addressee(s) and is 
+intended to be privileged and confidential within the attorney client 
+privilege.  If you have received this message in error, please immediately 
+notify the sender and delete all copies of this email message along with all 
+attachments.  Thank you.",2822,62,0,0,True,2001-05-16 08:35:00,0,57b2cd8b322c25b5a2aed8ec381cb7a6bff91b2dfb4eb506f1b573c73bd5059e
+skilling-j/_sent_mail/365.,3250,Re: Financial Market Solutions,financial market solutions,sherri.sera@enron.com,sherri.sera@enron.com,mcbride@fms2000.com,mcbride@fms2000.com,1,"carl.carter@enron.com, joannie.williamson@enron.com",carl.carter@enron.com;joannie.williamson@enron.com,2,"Mon, 12 Mar 2001 06:21:00 -0800 (PST)","Dear Mr. McBride,
+
+Thank you for the invitation.  Your e-mail doesn't indicate what date you 
+will be meeting with Mr. Carter; however, Mr. Skilling is traveling and will 
+be out of the office until Thursday, March 29.  Therefore, on behalf of Mr. 
+Skilling, I am declining his attendance.
+
+Regards,
+Sherri Sera
+Assistant to Jeff Skilling
+713.853.5984
+713.646.8381 (fax)
+sherri.sera@enron.com
+
+
+
+
+""Kenny McBride"" <mcbride@fms2000.com> on 03/12/2001 11:57:44 AM
+To: <Jeff.skilling@enron.com>
+cc:  
+
+Subject: Financial Market Solutions
+
+
+Dera Mr. Skilling,
+
+Just a short e-mail to invite you to a meeting that I will be having with
+Carl Carter in your on-line development team at 1.00pm on the 27th floor in
+your offices located at 1400 Smith.
+
+Financial Market Solutions (FMS) is a leading financial software company
+located in Bellevue, Washington. The company is dedicated to the development
+and implementation of Internet-based trading solutions for institutions in
+the global financial marketplace.  The central component of all FMS
+solutions is the Universal Trading Platform (UTP), which is a dynamic
+web-based platform that enables unlimited numbers of simultaneous users to
+access the system and execute trades on a fully automated basis. This basic
+premise distinguishes FMS from other solution providers and gives our
+clients the ability to more effectively manage the liquidity of multiple
+users, trading over the Internet on a single platform. The UTP has been
+fully developed as a complete Foreign Exchange dealing system, however, the
+same platform can be used for transactions in any tradable financial
+instrument.
+
+FMS has employed a team of expert software designers and technicians as well
+as experienced professionals from the financial markets, who together have
+designed and developed the UTP to transform the way the FX product is
+delivered to end-users. The platform is equally suited to the needs of large
+institutional users as well as retail investors. The FMS system, using the
+latest technology, is the most advanced on-line trading system available
+today and will likely shape the FX business model of the future.
+
+We have made some majorprogress over the last 15 months and are poised to
+announce some key relationships that will have a mojor impact in the FX
+industry.
+
+I understand that you are very busy, and that this invitation is unsolicited
+but as they say nothing ventured nothing gained.
+
+
+
+Kind Regards,
+
+Kenny McBride
+V.P. Marketing
+Financial Markets Solutions, Inc.
+2820 Northup Way, Suite #201
+Bellevue, WA  98004
+U.S.A.
+Office: 1-425-827-1262
+Fax:    1-425-827-3432
+Cell:   1-425-941-3725",2631,72,0,0,True,2001-03-12 14:21:00,0,ce6e90f81e103300b59324bff6913a161971a786521e55dd43bf7dca83f59cb6
+blair-l/sent_items/346.,4356,Wood and Brownell Confirmation Hearings,wood and brownell confirmation hearings,lynn.blair@enron.com,lynn.blair@enron.com,ava.garcia@enron.com,ava.garcia@enron.com,1,,,0,"Tue, 29 May 2001 20:20:00 -0700 (PDT)","Ava, here is the correct spelling of the two names we talked about today in=
+ the team leader
+meeting.  Thanks. Lynn
+---------------------- Forwarded by Lynn Blair/ET&S/Enron on 05/29/2001 05:=
+20 PM ---------------------------
+From:=09Janet Butler/ENRON@enronXgate on 05/29/2001 05:07 PM
+To:=09Daniel Allegretti/NA/Enron@Enron, Nancy Bagot/OTS/Enron@ENRON, Martha=
+ Benner/ENRON@enronXgate, Donna Bily/ENRON_DEVELOPMENT@ENRON_DEVELOPMENT, L=
+ynn Blair/ET&S/Enron@ENRON, Jack Boatman/ENRON@enronXgate, Rob Bradley/Corp=
+/Enron@ENRON, Theresa Branney/ENRON@enronXgate, Lorna Brennan/ENRON@enronXg=
+ate, Tom Briggs/NA/Enron@Enron, Janet Butler/ENRON@enronXgate, Alan Comnes/=
+ENRON@enronXgate, Bill Cordes/ENRON@enronXgate, Shelley Corman/ENRON@enronX=
+gate, Christi Culwell/ENRON@enronXgate, Shonnie Daniel/ENRON@enronXgate, Ma=
+ry Darveaux/ET&S/Enron@ENRON, Rick Dietz/ET&S/Enron@ENRON, Dari Dornan/ET&S=
+/Enron@ENRON, John Dushinske/ENRON@enronXgate, Sharon Farrell/ENRON@enronXg=
+ate, Drew Fossum/ENRON@enronXgate, Donna Fulton/Corp/Enron@ENRON, John Good=
+pasture/ENRON@enronXgate, Pearce W Hammond/HOU/EES@EES, Steven Harris/ET&S/=
+Enron@ENRON, Joe Hartsoe/Corp/Enron@ENRON, Glen Hass/ET&S/Enron@ENRON, Robe=
+rt Hayes/ENRON@enronXgate, Rod Hayslett/ENRON@enronXgate, Bambi Heckerman/E=
+NRON@enronXgate, Theresa Hess/ENRON@enronXgate, Robert Hill/ENRON@enronXgat=
+e, Staci Holtzman/ENRON@enronXgate, Tamara Hopkins/ENRON@enronXgate, Stanle=
+y Horton/Corp/Enron@Enron, Lee Huber/ET&S/Enron@ENRON, Martha Janousek/ENRO=
+N@enronXgate, Steven January/ET&S/Enron@ENRON, Steven J Kean/NA/Enron@Enron=
+, Robert Kilmer/ENRON@enronXgate, Frazier King/ENRON@enronXgate, Steve Kirk=
+/ENRON@enronXgate, Tim Kissner/ET&S/Enron@ENRON, Laura Lantefield/ENRON@enr=
+onXgate, Linda L Lawrence/NA/Enron@Enron, Blair Lichtenwalter/ENRON@enronXg=
+ate, Elizabeth Linnell/NA/Enron@Enron, Teb Lokey/ENRON@enronXgate, Phil Low=
+ry/OTS/Enron@ENRON, Susan J Mara/NA/Enron@ENRON, Donna Martens/ENRON@enronX=
+gate, Dorothy McCoppin/ENRON@enronXgate, Mike W McGowan/ENRON@enronXgate, M=
+ary Kay Miller/ET&S/Enron@ENRON, Sheila Nacey/ET&S/Enron@ENRON, Kimberly Ne=
+lson/ENRON@enronXgate, Ray Neppl/ENRON@enronXgate, Dave Neubauer/ET&S/Enron=
+@ENRON, Robert Neustaedter/ENRON_DEVELOPMENT@ENRON_DEVELOPMENT, Christi L N=
+icolay/HOU/ECT@ECT, Sarah Novosel/Corp/Enron@ENRON, Ranelle Paladino/ET&S/E=
+nron@Enron, Maureen Palmer/HOU/EES@EES, Zelda Paschal/ENRON@enronXgate, Gen=
+eva Patterson/ENRON@enronXgate, Maria Pavlou/ENRON@enronXgate, Keith Peters=
+en/ENRON@enronXgate, Janet Place/ENRON@enronXgate, Dan Pribble/ENRON@enronX=
+gate, Tony Pryor/ET&S/Enron@ENRON, Colleen Raker/ENRON@enronXgate, Randy Ri=
+ce/ENRON@enronXgate, Kathy Ringblom/ENRON@enronXgate, Linda Robertson/NA/En=
+ron@ENRON, James Saunders/ENRON@enronXgate, Lisa Sawyer/ENRON@enronXgate, D=
+onna Scott/FGT/Enron@ENRON, John Shafer/ENRON@enronXgate, Richard Shapiro/N=
+A/Enron@Enron, Mike G Smith/NA/Enron@Enron, Louis Soldano/ENRON@enronXgate,=
+ Lon Stanton/ET&S/Enron@ENRON, James D Steffes/NA/Enron@Enron, Kathleen Sul=
+livan/NA/Enron@ENRON, Jim Talcott/ENRON@enronXgate, Gina Taylor/ENRON@enron=
+Xgate, Denis Tu/ENRON@enronXgate, Michael Van Norden/Corp/Enron@ENRON, Step=
+hen Veatch/ENRON@enronXgate, Donald Vignaroli/ENRON@enronXgate, Jody Warner=
+/ENRON@enronXgate, Kimberly Watson/ENRON@enronXgate, Kim Wilkie/ENRON@enron=
+Xgate, Jane Wilson/ENRON_DEVELOPMENT@ENRON_DEVELOPMENT, Rob Wilson/ENRON@en=
+ronXgate, Michele Winckowski/ENRON@enronXgate, Lisa Yoho/NA/Enron@Enron
+cc:=09=20
+
+Subject:=09Wood and Brownell Confirmation Hearings
+
+
+
+The Senate approved the nominations for Pat Wood and Nora Brownell late las=
+t week for FERC commissioners. Wood will fill a term expiring June 30, 2005=
+ and Brownell will fill a term expiring June 30, 2001 continuing in a new f=
+ive-year term through June 30, 2006.",3850,58,0,0,True,2001-05-30 03:20:00,0,b8ebb9fa77cdc762e2cc27d5e259e38035747f2060b59e18fb45e8bb9ab05ae3
+campbell-l/all_documents/1560.,3996,Care for a Game of Gin?,care for a game of gin?,newsletter_ps@fun.playsite.com,newsletter_ps@fun.playsite.com,lcampbel@enron.com,lcampbel@enron.com,1,,,0,"Fri, 27 Apr 2001 10:41:00 -0700 (PDT)","[IMAGE]
+[IMAGE]				[IMAGE]	[IMAGE]
+[IMAGE]	
+	
+	
+	
+	
+	[IMAGE]
+	
+	
+	
+	[IMAGE]
+	
+	
+	
+	[IMAGE]
+	
+	
+	
+	[IMAGE]
+	
+	
+	
+	[IMAGE]
+	[IMAGE]
+	[IMAGE]
+	 tournaments!
+	
+	
+	
+	[IMAGE]
+	
+	
+	
+	
+	Chess - Open 
+	Backgammon - Open 
+	Checkers - Open 
+	Mancala 
+	Reversi 
+	Chess - Under 1300 
+	Backgammon - Under 1500 
+	Checkers - Under 1300 
+	Go-moku 
+	Hex 
+	
+	
+	[IMAGE]
+	
+	
+	
+	[IMAGE]
+	
+	
+	
+	[IMAGE]
+		[IMAGE]	
+			
+			
+			
+			
+			[IMAGE]
+			
+			
+			
+			
+			[IMAGE]issue #2
+			
+			
+			
+			
+			[IMAGE]
+			
+			
+			
+			
+			[IMAGE]
+			
+			[IMAGE]
+			[IMAGE]
+			
+			How 'Bout Some Tonic With That Gin?
+			The game of Gin was Hollywood's game. When it stormed through that town in 
+the '40s, you could see Gin being played on the silver screen by all types of 
+movie stars. Refined in the early 1900s at the Knickerbocker Whist Club in 
+New York, Gin is the perfect social card game. It's not so strategic as to 
+preclude chatting, but it still provides real competitive kick and a gleeful 
+way to gloat when the cards are laid down, and ""Gin"" is scored. Not every 
+online gaming site has Gin. But it's taking off on PlaySite. Take a break 
+from your day and try it! 
+			
+			
+			
+			
+			[IMAGE]
+			
+			[IMAGE]
+			[IMAGE]
+			
+			Tournament Time
+			What better way to test your gaming skills than to compete in an online 
+tournament with other top-ranked competitors? PlaySite offers automatically 
+scheduled tournaments in seven games: Backgammon, Checkers, Chess, Go-Moku, 
+Hex, Mancala and Reversi. Some games have tournaments geared for the 
+beginning player. Backgammon has tournaments for those rated Under 1500 and 
+an Open class. Checkers and Chess both have tournaments for those rated Under 
+1300 and a separate Open class. 
+			
+			Playing in a tournament is easy and fun. Go to your favorite game page, and 
+click to enter the tournament room. You'll see areas for tournament info, 
+signups, games, a history of prior tournaments and a schedule for upcoming 
+tournaments. PlaySite tourneys run throughout the day. Get a complete look at 
+the schedule here...
+			
+			
+			
+			
+			[IMAGE]
+			
+			
+			
+			
+			[IMAGE]
+			
+			
+			
+			
+			
+			[IMAGE]
+			
+			
+			Q: 
+			In what year was the first documented chess tournament held?
+			
+			
+			
+			A: 
+			1574 in Madrid, Spain. Wilhelm Steinitz claimed the first official world 
+championship after he beat Adolf Anderssen in 1866.
+			
+			
+			
+			
+			[IMAGE]
+			
+			
+			
+			Q: 
+			Who is the current United States chess champion?
+			
+			[IMAGE]
+			[IMAGE]
+			A: 
+			Grandmaster Joel Benjamin with a United States Chess Federation rating of 
+2650. Benjamin appeared in the 1993 chess movie ""Searching for Bobby Fischer.""
+			
+			
+			
+			
+			[IMAGE]
+			
+				[IMAGE]	[IMAGE]
+					[IMAGE]
+					[IMAGE]
+					[IMAGE]
+					[IMAGE]
+					We have your e-mail registered as: [lcampbel@enron.com]. Our records show 
+that you are interested in receiving this newsletter from PlaySite. 
+					
+					To unsubscribe to this mailing: Please go to the following page - 
+http://www.go2net.com/customize/email/unsubcenter.html and follow the 
+directions accordingly. 
+					
+					Terms of Service: http://www.go2net.com/corporate/legal/terms.html
+					Privacy Policy: http://www.go2net.com/corporate/legal 
+					
+					Go2Net marks include, but are not limited to: 100hotc, Authorize.NetSM, 
+DogpileSM, FreeYellowSM, Go2Netc, the Go2Net NetworkSM, the Go2Net StoreSM, 
+Haggle OnlineSM, HyperMartc, MetaCrawlerc, PlaySiteSM, Silicon Investorc, 
+Virtual AvenueSM, and Web MarketSM. 
+					
+					
+
+[IMAGE]",3498,184,0,0,True,2001-04-27 17:41:00,0,db5d9c5d252f4f5a235c2c1ca6eec2a98c0dfd2b434b4341cad6403026fa62f9
+mann-k/sent/4355.,1630,RE: Midway,midway,kay.mann@enron.com,kay.mann@enron.com,jkeffer@kslaw.com,jkeffer@kslaw.com,1,,,0,"Fri, 1 Jun 2001 09:14:00 -0700 (PDT)","---------------------- Forwarded by Kay Mann/Corp/Enron on 06/01/2001 04:14 
+PM ---------------------------
+From: Ben Jacoby/ENRON@enronXgate on 06/01/2001 04:09 PM
+To: Kay Mann/Corp/Enron@Enron
+cc:  
+
+Subject: RE: Midway
+
+I'm sorry. TECO and Ft. Pierce Utility Authority.
+
+ -----Original Message-----
+From:  Mann, Kay  
+Sent: Friday, June 01, 2001 1:35 PM
+To: Jacoby, Ben
+Subject: RE: Midway
+
+I need the name of the other party involved in Ft Pierce so that John can 
+clear conflicts.
+
+
+From: Ben Jacoby/ENRON@enronXgate on 06/01/2001 12:24 PM
+To: Kay Mann/Corp/Enron@Enron
+cc:  
+
+Subject: RE: Midway
+
+Can we assume this will also cover Ft. Pierce?
+
+ -----Original Message-----
+From:  Mann, Kay  
+Sent: Friday, June 01, 2001 10:09 AM
+To: jkeffer@kslaw.com; Jacoby, Ben
+Subject: Midway
+
+Mark Haedicke approved the hiring of King & Spalding for this matter.  I will 
+drop Mr. Derrick a voice mail, but I would faint if he objected.
+
+John, we need to talk about the sale of the LLC, and the generation of a 
+draft doc re same.  Please let me know if you are available today to discuss 
+this transaction with Sr. Jacoby and me.  Additionally, it would be helpful 
+to discuss the tolling arrangement with Ken.
+
+Thanks,
+
+Kay",1219,45,2,0,True,2001-06-01 16:14:00,2,71cb9f3e0b822a55db3f51cfa95af52d8e5b57705fd33a2c06bef82ef892e3fd
+shackleton-s/all_documents/11429.,2015,"Re: Schedule meeting with Mark Taylor for Thursday, June 7","schedule meeting with mark taylor for thursday, june 7",holly.keiser@enron.com,holly.keiser@enron.com,sara.shackleton@enron.com,sara.shackleton@enron.com,1,,,0,"Tue, 5 Jun 2001 01:36:00 -0700 (PDT)","Sorry... you mentioned that in the subject line.
+
+3:30 pm on Thursday.
+
+
+Holly Keiser
+Enron Americas
+Legal Department - EB 3887
+713-345-7893 (ph)
+713-646-3490 (fx)
+Holly.Keiser@enron.com
+
+
+
+	Sara Shackleton@ECT
+	06/05/2001 08:19 AM
+		
+		 To: Holly Keiser/ENRON_DEVELOPMENT@ENRON_DEVELOPMENT
+		 cc: 
+		 Subject: Re: Schedule meeting with Mark Taylor for Thursday, June 7
+
+I'd like to meet Thursday, June 7 
+
+Sara Shackleton
+Enron North America Corp.
+1400 Smith Street, EB 3801a
+Houston, Texas  77002
+713-853-5620 (phone)
+713-646-3490 (fax)
+sara.shackleton@enron.com
+
+
+
+	Holly Keiser@ENRON_DEVELOPMENT
+	06/05/2001 07:34 AM
+		
+		 To: Sara Shackleton/HOU/ECT@ECT
+		 cc: 
+		 Subject: Re: Schedule meeting with Mark Taylor for Thursday, June 7
+
+Sara -- I've scheduled 3:00 PM following today's Legal/Credit meeting.  If 
+you prefer later, please let me know.
+
+Thanks!
+Holly Keiser
+Enron Americas
+Legal Department - EB 3887
+713-345-7893 (ph)
+713-646-3490 (fx)
+Holly.Keiser@enron.com
+
+
+
+	Sara Shackleton@ECT
+	06/04/2001 06:12 PM
+		 
+		 To: Holly Keiser/ENRON_DEVELOPMENT@ENRON_DEVELOPMENT
+		 cc: 
+		 Subject: Schedule meeting with Mark Taylor for Thursday, June 7
+
+Does Mark have time in the afternoon to meet with me and Christian Yoder 
+(Portland - 2 hours earlier than CST)?  The topic is ""Washington State 
+PUD's"".  I'd schedule about an hour.  Thanks.
+
+
+Sara Shackleton
+Enron North America Corp.
+1400 Smith Street, EB 3801a
+Houston, Texas  77002
+713-853-5620 (phone)
+713-646-3490 (fax)
+sara.shackleton@enron.com",1508,72,0,0,True,2001-06-05 08:36:00,0,6da6a155a3b776a1e0769718fd1e408f79da65023f976a981090fc19aa528cb9
+linder-e/discussion_threads/366.,2416,Training Opportunities,training opportunities,amy.fitzpatrick@enron.com,amy.fitzpatrick@enron.com,portland.desk@enron.com,portland.desk@enron.com,1,,,0,"Wed, 11 Apr 2001 01:48:00 -0700 (PDT)","Just a reminder - if you are interested in attending either class, please let 
+me know by Friday.
+
+Thanks!
+Amy
+---------------------- Forwarded by Amy FitzPatrick/PDX/ECT on 04/11/2001 
+08:49 AM ---------------------------
+
+
+Amy FitzPatrick
+04/04/2001 04:23 PM
+To: Portland West Desk
+cc:  
+Subject: Training Opportunities
+
+We will be offering 2 training classes over the next few weeks.  If you are 
+interested in attending either of these courses, please let me know by 
+Friday, April 13th. 
+
+Tricks of the Trade for Analysts in the Energy Biz
+Presented by Jonathan Koomey, PhD, Staff Scientist, Lawrence Berkeley 
+National Lab
+
+Date:   Wednesday, April 18th
+Time:  9:00 am - 5:00 pm
+Location:   To Be Determined
+
+Course Outline:
+Put facts at your fingertips:  Key references and data sources.
+Understanding data:  Pitfalls in data acquisition and handling.
+Introduction to back of the envelope calculations.
+Summary of US and Western electricity systems.
+
+This course is still in the trial phase and will require each participant to 
+provide feedback as to the course content and overall delivery.  Class size 
+is limited to 15 participants. 
+
+Negotiation Skills Training - Fighting Fires Without Burning Bridges
+Presented by Steven Cohen, President, The Negotiation Skills Company
+
+Date:  Tuesday, May 8th and Wednesday May 9th
+Time:   9:00 am - 5:00 pm
+Location: To Be Determined
+Pre-Work: Questionnaire outlining your concerns about negotiation.
+  Reading Getting to Yes by Roger Fisher and William Ury (provided by Enron).
+  
+Course Outline:
+This workshop introduces the process of interest-based negotiation and 
+reinforces those skills through a carefully structured interactive program.  
+The training provides a group of participants with tools to increase 
+collaboration and reduce conflict.
+
+Class size is limited to 18 participants.
+
+If you have any questions regarding either program, please do not hesitate to 
+ask.
+
+Thanks!
+Amy",1943,59,0,0,True,2001-04-11 08:48:00,0,c206d4243035a520a7ae42158545d61557a42759bd08a2fefdf436fb43ad09f9
+presto-k/sent_items/521.,2307,RE: deal review,deal review,m..presto@enron.com,m..presto@enron.com,don.black@enron.com,don.black@enron.com,1,,,0,"Fri, 29 Jun 2001 06:36:14 -0700 (PDT)","I can speak with Chris Ahn when he gets back from his honeymoon.
+
+ -----Original Message-----
+From: 	Black, Don  
+Sent:	Friday, June 29, 2001 8:33 AM
+To:	Belden, Tim; Presto, Kevin M.; Dietrich, Janet
+Subject:	deal review
+
+Terry Donovan has dug up another two candidates, but both are on the fence.  Could either or all of you volunteer to call them and discuss the benefits of joining this effort?
+
+The pitch should center around the broad reaching interface within both the EES and EWS organization, the exposure to the entire risk management process from cradle to grave, and eventually, good face time with many of the senior leaders within both organizations as they present their research findings.
+
+This is a very hard group to recruit for, so anything you can do would be appreciated.  Send me a mail if you intend to help.  
+
+
+Suzette Emmons - She had some interest and is preparing to rotate but is leaning towards the SE Power Origination group in ENA because she is looking for modeling and commercial experience.  I think she would be a good fit (and also might want to go to Portland) and would like to figure out a way to get her.  She would be another good candidate for a phone call.
+
+Chris Ahn - He had already committed to rotate through Power Structuring and was scheduled to begin following return from his honeymoon in a couple of weeks.  He is reasonably interested in our opportunity (and following that by going to Portland to work in Tim's group) but had concerns about walking away from his commitment to structuring.  By the time he left he was almost ready to join us but wanted to think about it some more.  He is definitely someone that we could sway with a call from the right person.",1716,18,1,0,True,2001-06-29 13:36:14,1,28baa1042ac09e885eec37ce8be6b963c55b014ee415059edcf715195fa09026
+shackleton-s/all_documents/10906.,1913,Re: ISDA Draft Quark Power LLC and ENA,isda draft quark power llc and ena,carol.clair@enron.com,carol.clair@enron.com,caroline.abramo@enron.com,caroline.abramo@enron.com,1,"sara.shackleton@enron.com, frank.sayre@enron.com",sara.shackleton@enron.com;frank.sayre@enron.com,2,"Tue, 1 May 2001 05:35:00 -0700 (PDT)","Caroline:
+Please make sure that they know that in addition to the signed confirms, we 
+need the legal opinion.  I'm in meetings after 2 today so try to catch me 
+before then.
+
+Carol St. Clair
+EB 3889
+713-853-3989 (Phone)
+713-646-3393 (Fax)
+carol.st.clair@enron.com
+
+
+
+	Caroline Abramo@ENRON
+	05/01/2001 12:27 PM
+		
+		 To: Brent Hendry/NA/Enron@Enron
+		 cc: Carol St Clair/HOU/ECT@ECT, Russell Dyk/Corp/Enron@ENRON, Mog 
+Heu/NA/Enron@Enron, Robyn Zivic/NA/Enron@Enron
+		 Subject: Re: ISDA Draft Quark Power LLC and ENA
+
+Brent/ Carol- before you go to your conference:
+
+Brent- can you please send out the doc to SAC- checking on the manager (its 
+just the one fund) but please just leave blank for now.
+Carol- AIG funds.. I am getting the confirm back..their lawyer has a 
+question.. we will call you with him today.  Hope to get the ISDAs out to 
+them too.
+
+
+From: Brent Hendry on 05/01/2001 11:48 AM
+To: dbicker@paloma.com
+cc: Paul Radous/Enron@EnronXGate, Caroline Abramo/Corp/Enron@Enron 
+
+Subject: ISDA Draft Quark Power LLC and ENA
+
+Dan,
+
+Here is the latest draft of the ISDA Agreement.  Please review and let me 
+know if you have additional comments or questions.
+
+
+
+Regards,
+Brent Hendry
+
+Enron North America
+1400 Smith Street
+Houston Texas 77002
+Phone: 713 853 7124
+Fax:  713 646 3490",1291,51,0,0,True,2001-05-01 12:35:00,0,ad5ac4dc93b9131bae0c640774926305bd449c0146e9eb2a626ccae06f6ebda0
+hain-m/all_documents/328.,5265,Re: WP-02 Data Request,wp-02 data request,lysa.akin@enron.com,lysa.akin@enron.com,marss@perkinscoie.com,marss@perkinscoie.com,1,,,0,"Tue, 3 Apr 2001 08:07:00 -0700 (PDT)","Mary Hain has resigned her position with Enron.  Please remove her from all=
+=20
+mailing lists.
+
+
+  =20
+=09Enron Capital & Trade Resources Corp.
+=09
+=09From:  Steve Marshall <marss@perkinscoie.com>                          =
+=20
+04/03/2001 02:07 PM
+=09
+
+Please respond to marss@perkinscoie.com
+To: abuckley@wutc.wa.gov, alan@epud.org, ali.rodol@ci.seattle.wa.us,=20
+archive-power-ratecase@bpa.gov, aw_turner@pgn.com, BASSL@sce.com,=20
+bessex@cowlitzpud.org, bferranti@mbllp.com, bpadiscovery@merkellaw.com,=20
+ccopatrny@e-z.net, crow@millernash.com, cub@teleport.com, cwagers@dcpud.org=
+,=20
+dan.meek@usa.net, darcy@tonkon.com, darkills@popud.com, dbkinnard@pplmt.com=
+,=20
+dfaulk@puget.com, discoveryparalegal@bpa.gov, dldorrell@stoel.com,=20
+dmacgregor@morganlewis.com, doney@doneylaw.com, doug_brawley@pngc.com,=20
+dparrish@prmllp.com, dws@keywaycorp.com, eauverde@hotmail.com,=20
+eboyd@ppcpdx.org, efinklea@energyadvocates.com, elisaCKF@aol.com,=20
+EnerGlaw@aol.com, Eric.Larson@oremetwahchang.com, erick_johnson@pngc.com,=
+=20
+ghuhta@cowlitzpud.org, huse@eesconsulting.com, ias@dvclaw.com,=20
+jack.speer@alcoa.com, jacksonc@ida.net, janet.prewitt@state.or.us,=20
+jdeason@chbh.com, jeffn@subutil.com, jhartso@enron.com, JLH@mc-power.com,=
+=20
+johk@critfc.org, john.yanov@eweb.eugene.or.us, johncameron@dwt.com,=20
+jolynnr@mresearch.com, jpw@duncanallen.com, jrb_ora@televar.com,=20
+jsaven@pacifier.com, jschlect@avistacorp.com, kevin.clark@ci.seattle.wa.us,=
+=20
+kknitte@gcpud.org, kmoxness@cencoast.com, kpom@mail.pacifier.com,=20
+kyle@ppcpdx.org, lawyer@teleport.com, Lhamilton@avistaenergy.com,=20
+lpeters@pacifier.com, lwolv@worldaccessnet.com, lyn_williams@pgn.com,=20
+marc.hellman@state.or.us, marss@perkinscoie.com, matts1@atg.wa.gov,=20
+mershanlaw@aol.com, mhain@ect.enron.com, michaelearly@earthlink.net,=20
+mike.macdougall@powerex.com, mmetzler@ci.tacoma.wa.us,=20
+mschaff@worldnet.att.net, mthomas@mtpower.com, Paul@KinergyLLC.com,=20
+pete.forsyth@kaiseral.com, pete@ashland.or.us, peter@richardsonandoleary.co=
+m,=20
+pfox@bracepatt.com, pljacklin@stoel.com, pmurphy@mbllp.com,=20
+pnichols@idahopower.com, pobenchain@idahopower.com, pspi@dynegy.com,=20
+pvickery@tpud.org, rachel@rnp.org, ratecase@pngc.com, rates@ppcpdx.org,=20
+rbstrong@painehamblen.com, rdb@keywaycorp.com, rfoiani@gcpud.org,=20
+rkindley@schwabe.com, rle@givenspursley.com, rpierce@avistaenergy.com,=20
+scott.brattebo@pacificorp.com, seligman@teleport.com, simonf@atg.wa.gov,=20
+sjohnsto@wutc.wa.gov, skaravit@ci.tacoma.wa.us, stephens@eslerstephens.com,=
+=20
+steve@nwenergy.org, tdeboer@painehamblen.com, terrym@millcreeklaw.com,=20
+tgrim@chbh.com, townsend@chbh.com, tracigrundon@dwt.com,=20
+tstevenson@ci.burbank.ca.us, weavertr@yakima-wa.com, wmgt3@montana.com
+cc: =20
+Subject: WP-02 Data Request
+
+
+request_number:  PS-BPA 116 and 118
+firstname:  Steve
+lastname:  Marshall
+e-mail:  marss@perkinscoie.com
+directed_to:  Peter J. Burger - LP-7
+Office of General Counsel
+Bonneville Power Administration
+P.O. Box 3261
+Portland, Oregon  97208-3621
+exhibit_wp-02-e-:  BPA-78
+page_numbers:  1-8
+request_text:  PS-BPA:116, Page 3, Lines 1-3:  Beginning at line 1 the=20
+witnesses state =01&While SUB=01,s use of a straight-line extrapolation of =
+REP=20
+values and market prices is simple to use, it is not necessarily accurate.=
+=018 =20
+Please describe the conditions under which the extrapolation would not be=
+=20
+accurate.
+
+PS-BPA:118, Page 3, Lines 4-8:  Beginning at line 4 the witnesses state=20
+=01&While SUB correctly notes that the relative value of BPA=01,s below-mar=
+ket=20
+power increases as the difference between BPA-s price and the market price=
+=20
+increases, this is true for all power sold by BPA, whether it is the=20
+approximately 5,800 average megawatts (aMW) being sold to public body=20
+customers or the 1,000 aMW power portion of the IOUs=01, REP settlements.=
+=018  Has=20
+BPA calculated the value of BPA=01,s below market power for the approximate=
+ly=20
+5,800 average megawatts (aMW) being sold to public body customers?  If so,=
+=20
+please provide the value or values, and the calculations supporting the val=
+ue=20
+or values.
+
+contact_name:  Steve Marshall
+contact_address:  Perkins Coie
+One Bellevue Center, Suite 1800
+411 - 108th Avenue N.E.
+Bellevue, WA  98004
+contact_phone:  425-453-7314
+contact_email:  marss@perkinscoie.com
+contact_fax:  425-453-7350
+delivery_instructions:  Please mail hard coies of data responses to Steve=
+=20
+Marshall at the address above
+
+The following information is from the web server:
+1.  Logon: IUSR_GRANITE
+2.  Remote Host:  seairon.perkinscoie.com
+3.  Remote IP Address:  38.169.150.2
+4.  Form URL: =20
+https://secure.bpa.gov/power/secure/psp/ratecase/discovery/wp_02_request.ht=
+ml
+5.  Browser Client:  Mozilla/4.0 (compatible; MSIE 5.01; Windows NT)",4797,116,0,0,True,2001-04-03 15:07:00,0,b7f75d0c472b2349b892c139c191d90600c8c51a389f8ee523c75794179ab9fb
+mann-k/all_documents/5586.,3163,RE: NW escrow agreement,nw escrow agreement,mreuter@kslaw.com,mreuter@kslaw.com,kay.mann@enron.com,kay.mann@enron.com,1,jkeffer@kslaw.com,jkeffer@kslaw.com,1,"Mon, 14 May 2001 04:48:00 -0700 (PDT)","Not a problem.  I will e-mail the document to you in short order.
+
+-MIR
+
+-----Original Message-----
+From: Kay.Mann@enron.com [mailto:Kay.Mann@enron.com]
+Sent: Monday, May 14, 2001 10:45 AM
+To: Reuter, Marisa
+Cc: Keffer, John
+Subject: RE: NW escrow agreement
+
+
+
+Marissa,
+
+I suppose that's because ENA didn't sign it, as I didn't notice it (opps).
+It will probably be tomorrow since Ben will need to initial, as well as me.
+Can you email me the sig page?
+
+Thanks,
+
+
+
+
+
+
+""Reuter, Marisa"" <MReuter@KSLAW.com> on 05/14/2001 10:26:16 AM
+
+To:   ""'Kay.Mann@enron.com'"" <Kay.Mann@enron.com>
+cc:   ""Keffer, John"" <JKeffer@KSLAW.com>
+
+Subject:  RE: NW escrow agreement
+
+Kay:
+
+This past Friday, I received six original signature pages to the Letter
+Agreement, but did not receive original signature pages to the Guaranty.
+Could you forward the signature pages to the Guaranty at your earliest
+convenience?
+
+Thanks,
+
+Marisa
+
+-----Original Message-----
+From: Kay.Mann@enron.com [mailto:Kay.Mann@enron.com]
+Sent: Monday, May 14, 2001 8:54 AM
+To: jkeffer@kslaw.com; mreuter@kslaw.com
+Subject: NW escrow agreement
+
+
+Hi there,
+
+I believe Chris should be back today, so I wanted to follow up on this.
+
+I don't have any recollection of where we left the escrow agreement with
+NW.  Please get with MKahn or Jerry DeBerry to see if we can get consensus
+on the current form of escrow agreement.  Once we have that, Enron (Chris)
+will make contact with Citibank.
+
+Thanks,
+
+Kay
+Confidentiality Notice
+This message is being sent by or on behalf of a lawyer.  It is intended
+exclusively for the individual or entity to which it is addressed.  This
+communication may contain information that is proprietary, privileged or
+confidential or otherwise legally exempt from disclosure.  If you are not
+the named addressee, you are not authorized to read, print, retain, copy or
+disseminate this message or any part of it.  If you have received this
+message in error, please notify the sender immediately by e-mail and delete
+all copies of the message.
+
+
+
+
+
+
+
+
+
+
+Confidentiality Notice
+This message is being sent by or on behalf of a lawyer.  It is intended 
+exclusively for the individual or entity to which it is addressed.  This 
+communication may contain information that is proprietary, privileged or 
+confidential or otherwise legally exempt from disclosure.  If you are not the 
+named addressee, you are not authorized to read, print, retain, copy or 
+disseminate this message or any part of it.  If you have received this 
+message in error, please notify the sender immediately by e-mail and delete 
+all copies of the message.",2599,91,2,0,True,2001-05-14 11:48:00,2,5e74359d5050e85dfae03297f9dfdbd7566d9712dd5f363abfd73ace036a46d7
+mcconnell-m/notes_inbox/113.,2573,Update on PMI/Ministry of Finance Meeting,update on pmi/ministry of finance meeting,randal.maffett@enron.com,randal.maffett@enron.com,mike.mcconnell@enron.com,mike.mcconnell@enron.com,1,,,0,"Fri, 11 May 2001 10:18:00 -0700 (PDT)","FYI - see message below re: our potential trip to Mexico City on 5/21.  We're 
+pushing to get the meetings back to back but you know how politicians can 
+be.  Will keep you posted.  If the meetings can NOT be back to back would you 
+want to consider taking one of the smaller company jets?  Your call, I can 
+work either way.
+
+
+---------------------- Forwarded by Randal Maffett/HOU/ECT on 05/11/2001 
+05:16 PM ---------------------------
+
+
+<Eric_Bradley@mckinsey.com> on 05/11/2001 02:24:08 PM
+To: <Randal.Maffett@enron.com>
+cc: Thomas_Seitz@mckinsey.com, Beth.A.Ryan@enron.com 
+Subject: Update on PMI/Ministry of Finance Meeting
+
+Randy:
+
+I just spoke with Pedro regarding the Ministry of Finance Meeting in Mexico
+City.  He is hopeful (but not certain) that we can schedule a meeting on
+the back end of the PMI session.  I suggest you and Mike continue to keep
+the entire day open at this point.   If it turns out that the Ministry of
+Finance meeting will be later in the day, Pedro can shuttle you and Mike to
+our Mexico City office where you may access phones, desks, etc. during the
+interim.
+
+You will most likely meet with the Director General of Credit who is
+responsible for managing fx, and financial credit with the international
+markets.  He's in a very influential position within the Finance Ministry.
+
+Let me know if you need any additional info at this point. Otherwise, we'll
+review the Ministry of Finance document and Maya pricing concepts on
+Tuesday, 15th, at 9 am here in our office.
+
+Regards, Eric
+
+
+
++-------------------------------------------------------------+
+| This message may contain confidential and/or privileged     |
+| information.  If you are not the addressee or authorized to |
+| receive this for the addressee, you must not use, copy,     |
+| disclose or take any action based on this message or any    |
+| information herein.  If you have received this message in   |
+| error, please advise the sender immediately by reply e-mail |
+| and delete this message.  Thank you for your cooperation.   |
++-------------------------------------------------------------+",2097,47,0,0,True,2001-05-11 17:18:00,0,d1c2a66cec610f3b97f1f1815fdefeae6a3b2d088e4031dace2f0375a8482d23

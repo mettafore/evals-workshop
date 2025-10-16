@@ -57,22 +57,22 @@ def resolve_run_id(
 
 
 def load_email(
-    conn: duckdb.DuckDBPyConnection, email_id: str
+    conn: duckdb.DuckDBPyConnection, email_hash: str
 ) -> Optional[Dict[str, Any]]:
     result = conn.execute(
         """
-        SELECT email_id, subject, body, metadata, run_id
+        SELECT email_hash, subject, body, metadata, run_id
         FROM emails_raw
-        WHERE email_id = ?
+        WHERE email_hash = ?
         LIMIT 1
         """,
-        (email_id,),
+        (email_hash,),
     ).fetchone()
     if not result:
         return None
     metadata = json.loads(result[3]) if result[3] else {}
     return {
-        "email_id": result[0],
+        "email_hash": result[0],
         "subject": result[1],
         "body": result[2],
         "metadata": metadata,
@@ -83,31 +83,31 @@ def load_email(
 def list_emails(conn: duckdb.DuckDBPyConnection, run_id: str) -> List[Dict[str, Any]]:
     rows = conn.execute(
         """
-        SELECT email_id, subject, metadata
+        SELECT email_hash, subject, metadata
         FROM emails_raw
         WHERE run_id = ?
-        ORDER BY email_id
+        ORDER BY email_hash
         """,
         (run_id,),
     ).fetchall()
     emails = []
-    for email_id, subject, metadata_json in rows:
+    for email_hash_value, subject, metadata_json in rows:
         metadata = json.loads(metadata_json) if metadata_json else {}
-        emails.append({"email_id": email_id, "subject": subject, "metadata": metadata})
+        emails.append({"email_hash": email_hash_value, "subject": subject, "metadata": metadata})
     return emails
 
 
 def get_annotations(
-    conn: duckdb.DuckDBPyConnection, email_id: str
+    conn: duckdb.DuckDBPyConnection, email_hash: str
 ) -> List[Dict[str, Any]]:
     rows = conn.execute(
         """
         SELECT annotation_id, labeler_id, open_code, pass_fail, run_id, created_at
         FROM annotations
-        WHERE email_id = ?
+        WHERE email_hash = ?
         ORDER BY created_at DESC
         """,
-        (email_id,),
+        (email_hash,),
     ).fetchall()
     annotations = []
     for anno_id, labeler_id, open_code, pass_fail, run_id, created_at in rows:
@@ -144,17 +144,17 @@ def get_failure_modes(conn: duckdb.DuckDBPyConnection) -> List[Dict[str, Any]]:
 
 
 def get_selected_failure_modes(
-    conn: duckdb.DuckDBPyConnection, email_id: str
+    conn: duckdb.DuckDBPyConnection, email_hash: str
 ) -> List[Dict[str, Any]]:
     rows = conn.execute(
         """
         SELECT al.failure_mode_id, fm.display_name, fm.definition, al.annotation_id
         FROM axial_links al
         JOIN failure_modes fm ON al.failure_mode_id = fm.failure_mode_id
-        WHERE al.annotation_id IN (SELECT annotation_id FROM annotations WHERE email_id = ?)
+        WHERE al.annotation_id IN (SELECT annotation_id FROM annotations WHERE email_hash = ?)
         ORDER BY al.linked_at DESC
         """,
-        (email_id,),
+        (email_hash,),
     ).fetchall()
     return [
         {
@@ -182,7 +182,7 @@ def api_context():
         return jsonify(
             {
                 "run_id": run_id,
-                "email_ids": [e["email_id"] for e in emails],
+                "email_hashes": [e["email_hash"] for e in emails],
                 "emails": emails,
                 "labelers": conn.execute(
                     "SELECT labeler_id, name FROM labelers ORDER BY created_at"
@@ -191,14 +191,14 @@ def api_context():
         )
 
 
-@app.get("/api/email/<email_id>")
-def api_email(email_id: str):
+@app.get("/api/email/<email_hash>")
+def api_email(email_hash: str):
     with get_conn() as conn:
-        email = load_email(conn, email_id)
+        email = load_email(conn, email_hash)
         if not email:
             return jsonify({"error": "Email not found"}), 404
-        annotations = get_annotations(conn, email_id)
-        failure_modes = get_selected_failure_modes(conn, email_id)
+        annotations = get_annotations(conn, email_hash)
+        failure_modes = get_selected_failure_modes(conn, email_hash)
         return jsonify(
             {
                 "email": email,
@@ -226,16 +226,16 @@ def api_labelers_create():
 @app.post("/api/annotations")
 def api_annotations_create():
     payload = request.json or {}
-    email_id = payload.get("email_id")
+    email_hash_value = payload.get("email_hash")
     open_code = payload.get("open_code", "").strip()
     pass_fail = payload.get("pass_fail")
     labeler_id = payload.get("labeler_id")
-    if not email_id or not open_code:
-        return jsonify({"error": "email_id and open_code are required"}), 400
+    if not email_hash_value or not open_code:
+        return jsonify({"error": "email_hash and open_code are required"}), 400
     annotation_id = uuid.uuid4().hex
     created_at = datetime.utcnow().isoformat() + "Z"
     with get_conn() as conn:
-        email = load_email(conn, email_id)
+        email = load_email(conn, email_hash_value)
         if not email:
             return jsonify({"error": "Email not found"}), 404
         if labeler_id:
@@ -249,12 +249,12 @@ def api_annotations_create():
                 )
         conn.execute(
             """
-            INSERT OR REPLACE INTO annotations(annotation_id, email_id, labeler_id, open_code, pass_fail, run_id, created_at, updated_at)
+            INSERT OR REPLACE INTO annotations(annotation_id, email_hash, labeler_id, open_code, pass_fail, run_id, created_at, updated_at)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 annotation_id,
-                email_id,
+                email_hash_value,
                 labeler_id,
                 open_code,
                 bool(pass_fail) if pass_fail is not None else None,
@@ -264,9 +264,9 @@ def api_annotations_create():
             ),
         )
     return jsonify(
-        {
-            "annotation_id": annotation_id,
-            "email_id": email_id,
+            {
+                "annotation_id": annotation_id,
+                "email_hash": email_hash_value,
             "labeler_id": labeler_id,
             "open_code": open_code,
             "pass_fail": pass_fail,
@@ -352,11 +352,11 @@ def api_axial_links_delete():
 
 @app.get("/api/failure-modes/suggest")
 def api_failure_modes_suggest():
-    email_id = request.args.get("email_id")
-    if not email_id:
-        return jsonify({"error": "email_id required"}), 400
+    email_hash = request.args.get("email_hash")
+    if not email_hash:
+        return jsonify({"error": "email_hash required"}), 400
     with get_conn() as conn:
-        annotations = get_annotations(conn, email_id)
+        annotations = get_annotations(conn, email_hash)
     word_counter: Counter[str] = Counter()
     for ann in annotations:
         tokens = re.findall(r"[A-Za-z]{4,}", ann["open_code"].lower())

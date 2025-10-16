@@ -1,5 +1,5 @@
 const state = {
-  emails: [],
+  emailHashes: [],
   index: 0,
   runId: null,
   annotations: [],
@@ -55,22 +55,22 @@ async function fetchJSON(url, options = {}) {
 async function loadContext() {
   const data = await fetchJSON('/api/context');
   state.runId = data.run_id;
-  state.emails = data.email_ids;
+  state.emailHashes = data.email_hashes || data.email_ids || [];
   state.labelers = data.labelers || [];
   elements.runId.textContent = state.runId;
   updatePosition();
   populateLabelers();
-  if (state.emails.length) {
-    await loadEmail(state.emails[state.index]);
+  if (state.emailHashes.length) {
+    await loadEmail(state.emailHashes[state.index]);
   }
 }
 
 function updatePosition() {
-  if (!state.emails.length) {
+  if (!state.emailHashes.length) {
     elements.position.textContent = '0 / 0';
     return;
   }
-  elements.position.textContent = `${state.index + 1} / ${state.emails.length}`;
+  elements.position.textContent = `${state.index + 1} / ${state.emailHashes.length}`;
 }
 
 function populateLabelers() {
@@ -87,8 +87,8 @@ function populateLabelers() {
   }
 }
 
-async function loadEmail(emailId) {
-  const data = await fetchJSON(`/api/email/${encodeURIComponent(emailId)}`);
+async function loadEmail(emailHash) {
+  const data = await fetchJSON(`/api/email/${encodeURIComponent(emailHash)}`);
   const email = data.email;
   state.annotations = data.annotations;
   state.failureModes = data.available_failure_modes || [];
@@ -129,8 +129,8 @@ function renderAnnotations() {
   state.annotations.forEach(annotation => {
     const item = document.createElement('li');
     item.className = 'annotation-item';
-    if (annotation.pass_fail === true) item.classList.add('fail');
-    if (annotation.pass_fail === false) item.classList.add('pass');
+    if (annotation.pass_fail === true) item.classList.add('pass');
+    if (annotation.pass_fail === false) item.classList.add('fail');
 
     const header = document.createElement('header');
     header.innerHTML = `<span>${annotation.labeler_id || 'unknown'} · ${new Date(annotation.created_at).toLocaleString()}</span>`;
@@ -138,7 +138,7 @@ function renderAnnotations() {
     removeBtn.textContent = 'Remove';
     removeBtn.addEventListener('click', async () => {
       await fetchJSON(`/api/annotations/${annotation.annotation_id}`, { method: 'DELETE' });
-      await loadEmail(state.emails[state.index]);
+      await loadEmail(state.emailHashes[state.index]);
     });
     header.appendChild(removeBtn);
     const body = document.createElement('p');
@@ -166,7 +166,7 @@ function renderSelectedFailureModes(modes) {
     remove.textContent = '×';
     remove.addEventListener('click', async () => {
       await fetchJSON(`/api/axial-links?annotation_id=${mode.annotation_id}&failure_mode_id=${mode.failure_mode_id}`, { method: 'DELETE' });
-      await loadEmail(state.emails[state.index]);
+      await loadEmail(state.emailHashes[state.index]);
     });
     chip.appendChild(remove);
     elements.selectedFailureModes.appendChild(chip);
@@ -196,7 +196,7 @@ async function submitAnnotation(event) {
   const passFail = passFailRaw === '' ? null : passFailRaw === '1';
   const labelerId = elements.labelerSelect.value || null;
   const payload = {
-    email_id: state.emails[state.index],
+    email_hash: state.emailHashes[state.index],
     open_code: openCode,
     pass_fail: passFail,
     labeler_id: labelerId,
@@ -207,7 +207,7 @@ async function submitAnnotation(event) {
   });
   elements.annotationDialog.close();
   elements.annotationForm.reset();
-  await loadEmail(state.emails[state.index]);
+  await loadEmail(state.emailHashes[state.index]);
 }
 
 async function submitFailureMode(event) {
@@ -241,7 +241,7 @@ async function submitFailureMode(event) {
   });
   elements.failureDialog.close();
   elements.failureForm.reset();
-  await loadEmail(state.emails[state.index]);
+  await loadEmail(state.emailHashes[state.index]);
 }
 
 async function handleSuggestions() {
@@ -249,8 +249,8 @@ async function handleSuggestions() {
     alert('Add annotations before generating suggestions.');
     return;
   }
-  const emailId = state.emails[state.index];
-  const data = await fetchJSON(`/api/failure-modes/suggest?email_id=${emailId}`);
+  const emailHash = state.emailHashes[state.index];
+  const data = await fetchJSON(`/api/failure-modes/suggest?email_hash=${emailHash}`);
   state.suggestions = data.suggestions || [];
   if (!state.suggestions.length) {
     alert('No suggestions available yet – add more detailed annotations.');
@@ -284,14 +284,14 @@ function bindEvents() {
     if (state.index > 0) {
       state.index -= 1;
       updatePosition();
-      loadEmail(state.emails[state.index]);
+      loadEmail(state.emailHashes[state.index]);
     }
   });
   elements.nextBtn.addEventListener('click', () => {
-    if (state.index < state.emails.length - 1) {
+    if (state.index < state.emailHashes.length - 1) {
       state.index += 1;
       updatePosition();
-      loadEmail(state.emails[state.index]);
+      loadEmail(state.emailHashes[state.index]);
     }
   });
   elements.annotateBtn.addEventListener('click', () => {
@@ -325,7 +325,13 @@ function bindEvents() {
     if (event.target instanceof HTMLTextAreaElement || event.target instanceof HTMLInputElement) {
       return;
     }
-    if (event.key === 'ArrowLeft') {
+    if (event.key.toLowerCase() === 'z') {
+    event.preventDefault();
+    elements.annotationPassFail.value = '1';
+  } else if (event.key.toLowerCase() === 'x') {
+    event.preventDefault();
+    elements.annotationPassFail.value = '0';
+  } else if (event.key === 'ArrowLeft') {
       event.preventDefault();
       elements.prevBtn.click();
     } else if (event.key === 'ArrowRight') {
