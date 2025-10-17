@@ -27,15 +27,27 @@ CREATE TABLE IF NOT EXISTS trace_runs (
 --     FOREIGN KEY (run_id) REFERENCES trace_runs(run_id)
 -- );
 
+CREATE TABLE IF NOT EXISTS email_judgments (
+    email_hash TEXT NOT NULL,
+    run_id TEXT NOT NULL,
+    labeler_id TEXT NOT NULL,
+    pass_fail BOOLEAN NOT NULL,
+    judged_at TIMESTAMP DEFAULT current_timestamp,
+    updated_at TIMESTAMP,
+    PRIMARY KEY (email_hash, run_id, labeler_id),
+    FOREIGN KEY (labeler_id) REFERENCES labelers(labeler_id),
+    FOREIGN KEY (run_id) REFERENCES trace_runs(run_id)
+);
+
 CREATE TABLE IF NOT EXISTS annotations (
     annotation_id TEXT PRIMARY KEY,
-    email_hash TEXT,
-    labeler_id TEXT,
-    open_code TEXT,
-    pass_fail BOOLEAN,
-    run_id TEXT,
+    email_hash TEXT NOT NULL,
+    labeler_id TEXT NOT NULL,
+    open_code TEXT NOT NULL,
+    run_id TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT current_timestamp,
     updated_at TIMESTAMP,
+    FOREIGN KEY (email_hash, run_id, labeler_id) REFERENCES email_judgments(email_hash, run_id, labeler_id),
     FOREIGN KEY (labeler_id) REFERENCES labelers(labeler_id),
     FOREIGN KEY (run_id) REFERENCES trace_runs(run_id)
 );
@@ -60,6 +72,8 @@ CREATE TABLE IF NOT EXISTS axial_links (
     FOREIGN KEY (run_id) REFERENCES trace_runs(run_id)
 );
 
+CREATE INDEX IF NOT EXISTS idx_email_judgments_run_id ON email_judgments(run_id);
+CREATE INDEX IF NOT EXISTS idx_email_judgments_email_hash ON email_judgments(email_hash);
 CREATE INDEX IF NOT EXISTS idx_annotations_email_hash ON annotations(email_hash);
 CREATE INDEX IF NOT EXISTS idx_annotations_run_id ON annotations(run_id);
 CREATE INDEX IF NOT EXISTS idx_axial_links_run_id ON axial_links(run_id);

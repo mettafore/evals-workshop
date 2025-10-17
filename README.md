@@ -9,7 +9,7 @@ Hands-on curriculum for teaching the Analyze → Measure → Improve loop on an 
 - `notebooks/01a-generate-synthetic-data.ipynb` – Homework-style synthetic generator (offline template + optional LLM path) producing `data/synthetic_emails.{csv,jsonl}`.
 - `notebooks/02-open-and-axial-coding.ipynb` – analyze annotations from DuckDB, compare failure-mode coverage, and export results.
 - `tools/generate_email_traces.py` – CLI that reads an email CSV, replays the saved prompt, writes request/response traces to `annotation/traces/<run_id>/`, and upserts tables in `data/email_annotations.duckdb`.
-- `tools/email_annotation_app.py` + `annotation/templates/` + `annotation/static/` – keyboard-friendly annotation UI inspired by Notebook 00's explorer (A to annotate, F to add failure modes, ←/→ to navigate).
+- `tools/email_annotation_app.py` + `annotation/templates/` + `annotation/static/` – keyboard-friendly annotation UI inspired by Notebook 00's explorer (Z/X to judge pass/fail, N to add notes, F to add failure modes, ←/→ to navigate).
 - `sql/annotation_schema.sql` – DuckDB schema (labelers, trace runs, emails, annotations, failure modes, axial links).
 - `prompts/` – `email_summary_prompt.txt`, a single template that contains both instructions and placeholders for Subject/From/To/Cc/Body.
 - `data/` – raw/filtered email CSVs, synthetic exports, DuckDB catalog.
@@ -34,7 +34,7 @@ Hands-on curriculum for teaching the Analyze → Measure → Improve loop on an 
    - For live demos, toggle `RUN_TRACE_GENERATOR = True` inside Notebook 02 to run the same command inline.
 4. **Annotate in the Browser**
    - Launch `uv run python tools/email_annotation_app.py` (or `python tools/email_annotation_app.py`) and open `http://localhost:5001`.
-   - Controls: `A` (add annotation; Enter saves, Esc cancels), `Z` (mark pass), `X` (mark fail), `F` (link failure mode after at least one annotation), `←/→` (navigate emails), `Generate Failure Modes` (token-based suggestions). Selected failure modes appear as removable chips beneath the picker. All changes persist immediately to DuckDB—no manual save button.
+   - Controls: `Z` (mark pass), `X` (mark fail), `Esc` (remove judgment), `N` (add note), `F` (link failure mode; fail only), `←/→` (navigate emails), `Generate Failure Modes` (token-based suggestions). Selected failure modes appear as removable chips beneath the picker. All changes persist immediately to DuckDB—no manual save button.
 5. **Analyze in Notebook 02**
    - Choose `filtered` vs `synthetic` dataset, verify available `run_id`s, inspect DuckDB tables, review pass/fail mix, Intent × status pivots, failure-mode/intent co-occurrence, and export CSV snapshots (`EXPORT = True`).
 6. **Iterate**
@@ -53,13 +53,13 @@ Run these commands from the project root directory.
 
 ## Quick Reference
 - **Keyboard shortcuts** (annotation UI):
-  - `A` – add annotation
-  - `Z` – mark annotation as pass
-  - `X` – mark annotation as fail
-  - `F` – attach failure mode
+  - `Z` – mark email as pass (instant judgment)
+  - `X` – mark email as fail (instant judgment)
+  - `Esc` – remove judgment (instant delete)
+  - `N` – add note (observation)
+  - `F` – attach failure mode (fail only)
   - `←/→` – navigate between emails
-  - `Esc` – cancel dialog
-  - `Enter` – confirm/save
+  - `Enter` – confirm/save in dialogs
 - **Run IDs**: short Git SHA (with `-dirty` suffix if the workspace isn't clean). They label trace folders, display in the UI, and index DuckDB tables.
 - **Exports**: Notebook 02 writes `data/email_annotations_<run_id>.csv` and `data/failure_modes_<run_id>.csv` when `EXPORT = True`; include the run ID when sharing results.
 

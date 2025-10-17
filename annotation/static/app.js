@@ -2,10 +2,10 @@ const state = {
   emailHashes: [],
   index: 0,
   runId: null,
+  judgment: null,  // {pass_fail, judged_at, updated_at} for current email
   annotations: [],
   failureModes: [],
   labelers: [],
-  suggestions: [],
 };
 
 function qs(selector) {
@@ -25,18 +25,17 @@ const elements = {
   newLabelerBtn: qs('#new-labeler-btn'),
   prevBtn: qs('#prev-btn'),
   nextBtn: qs('#next-btn'),
-  annotateBtn: qs('#annotate-btn'),
+  judgmentStatus: qs('#judgment-status'),
+  addNoteBtn: qs('#add-note-btn'),
   failureBtn: qs('#failure-btn'),
-  suggestBtn: qs('#suggest-btn'),
   emailSubject: qs('#email-subject'),
   metadataChips: qs('#metadata-chips'),
   emailBody: qs('#email-body'),
   annotationList: qs('#annotation-list'),
   selectedFailureModes: qs('#selected-failure-modes'),
-  annotationDialog: qs('#annotation-dialog'),
-  annotationForm: qs('#annotation-form'),
-  annotationText: qs('#annotation-text'),
-  annotationPassFail: qs('#annotation-passfail'),
+  noteDialog: qs('#note-dialog'),
+  noteForm: qs('#note-form'),
+  noteText: qs('#note-text'),
   failureDialog: qs('#failure-dialog'),
   failureForm: qs('#failure-form'),
   failureSelect: qs('#failure-select'),
@@ -118,8 +117,13 @@ function populateLabelers() {
 }
 
 async function loadEmail(emailHash) {
-  const data = await fetchJSON(`/api/email/${encodeURIComponent(emailHash)}`);
+  const labelerId = elements.labelerSelect.value;
+  if (!labelerId) {
+    return;
+  }
+  const data = await fetchJSON(`/api/email/${encodeURIComponent(emailHash)}?labeler_id=${encodeURIComponent(labelerId)}`);
   const email = data.email;
+  state.judgment = data.judgment;  // {pass_fail, judged_at, updated_at} or null
   state.annotations = data.annotations;
   state.failureModes = data.available_failure_modes || [];
 
@@ -172,9 +176,32 @@ async function loadEmail(emailHash) {
     elements.llmCommitments.appendChild(li);
   }
 
+  renderJudgment();
   renderAnnotations();
   renderSelectedFailureModes(data.failure_modes || []);
   populateFailureSelect();
+}
+
+function renderJudgment() {
+  // Remove existing judgment classes from email body
+  elements.emailBody.classList.remove('judgment-pass', 'judgment-fail');
+
+  if (!state.judgment) {
+    elements.judgmentStatus.textContent = 'No judgment yet. Press Z (pass) or X (fail).';
+    elements.judgmentStatus.className = '';
+    return;
+  }
+
+  const status = state.judgment.pass_fail ? 'PASS ✓' : 'FAIL ✗';
+  const className = state.judgment.pass_fail ? 'pass' : 'fail';
+  const timestamp = new Date(state.judgment.judged_at).toLocaleString();
+
+  // Update judgment status display
+  elements.judgmentStatus.textContent = `${status} (${timestamp})`;
+  elements.judgmentStatus.className = className;
+
+  // Highlight email body background
+  elements.emailBody.classList.add(`judgment-${className}`);
 }
 
 function formatBody(body) {
@@ -192,15 +219,13 @@ function renderAnnotations() {
   elements.annotationList.innerHTML = '';
   if (!state.annotations.length) {
     const empty = document.createElement('li');
-    empty.textContent = 'No annotations yet—press A to add one.';
+    empty.textContent = 'No notes yet. Press N to add one.';
     elements.annotationList.appendChild(empty);
     return;
   }
   state.annotations.forEach(annotation => {
     const item = document.createElement('li');
     item.className = 'annotation-item';
-    if (annotation.pass_fail === true) item.classList.add('pass');
-    if (annotation.pass_fail === false) item.classList.add('fail');
 
     const header = document.createElement('header');
     header.innerHTML = `<span>${annotation.labeler_id || 'unknown'} · ${new Date(annotation.created_at).toLocaleString()}</span>`;
@@ -258,41 +283,104 @@ function populateFailureSelect() {
   });
 }
 
-async function submitAnnotation(event) {
-  event.preventDefault();
-  const openCode = elements.annotationText.value.trim();
-  const passFailRaw = elements.annotationPassFail.value;
-  const passFail = passFailRaw === '' ? null : passFailRaw === '1';
-
-  // Require observation text only for fail cases
-  if (!openCode && passFail !== true) {
-    alert('Please provide an observation for fail cases.');
+async function createJudgment(passFail) {
+  const labelerId = elements.labelerSelect.value;
+  if (!labelerId) {
+    alert('Select a labeler first.');
     return;
   }
-
-  const labelerId = elements.labelerSelect.value || null;
   const payload = {
     email_hash: state.emailHashes[state.index],
-    open_code: openCode || '(pass)',
     pass_fail: passFail,
     labeler_id: labelerId,
   };
-  await fetchJSON('/api/annotations', {
+  await fetchJSON('/api/judgments', {
     method: 'POST',
     body: JSON.stringify(payload),
   });
-  elements.annotationDialog.close();
-  elements.annotationForm.reset();
+  await loadEmail(state.emailHashes[state.index]);
+}
+
+async function deleteJudgment() {
+  if (!state.judgment) {
+    return;  // Nothing to delete
+  }
+  const labelerId = elements.labelerSelect.value;
+  if (!labelerId) {
+    return;
+  }
+  // Instant delete - no confirmation dialog
+  await fetchJSON(
+    `/api/judgments?email_hash=${encodeURIComponent(state.emailHashes[state.index])}&labeler_id=${encodeURIComponent(labelerId)}`,
+    { method: 'DELETE' }
+  );
+  await loadEmail(state.emailHashes[state.index]);
+}
+
+async function submitNote(event) {
+  event.preventDefault();
+  const openCode = elements.noteText.value.trim();
+  if (!openCode) {
+    alert('Please provide a note.');
+    return;
+  }
+
+  const labelerId = elements.labelerSelect.value;
+  const existingNote = state.annotations.find(a => a.labeler_id === labelerId);
+
+  if (existingNote) {
+    // Update existing note
+    await fetchJSON(`/api/annotations/${existingNote.annotation_id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ open_code: openCode }),
+    });
+  } else {
+    // Create new note
+    const payload = {
+      email_hash: state.emailHashes[state.index],
+      open_code: openCode,
+      labeler_id: labelerId,
+    };
+    await fetchJSON('/api/annotations', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+  }
+
+  elements.noteDialog.close();
+  elements.noteForm.reset();
   await loadEmail(state.emailHashes[state.index]);
 }
 
 async function submitFailureMode(event) {
   event.preventDefault();
-  if (!state.annotations.length) {
-    alert('Add an annotation before assigning failure modes.');
+  if (!state.judgment) {
+    alert('Create a judgment (Z/X) before assigning failure modes.');
     return;
   }
-  const selectedAnnotation = state.annotations[0];
+  if (state.judgment.pass_fail) {
+    alert('Failure modes are only for failed emails.');
+    return;
+  }
+
+  // Create a placeholder annotation if none exists (for backward compatibility with axial_links)
+  let annotationId;
+  if (state.annotations.length > 0) {
+    annotationId = state.annotations[0].annotation_id;
+  } else {
+    // Create implicit annotation for failure mode linkage
+    const labelerId = elements.labelerSelect.value;
+    const response = await fetchJSON('/api/annotations', {
+      method: 'POST',
+      body: JSON.stringify({
+        email_hash: state.emailHashes[state.index],
+        open_code: '(failure mode assignment)',
+        labeler_id: labelerId,
+      }),
+    });
+    annotationId = response.annotation_id;
+  }
+
   const existingId = elements.failureSelect.value || null;
   let failureModeId = existingId;
   if (!existingId) {
@@ -311,48 +399,13 @@ async function submitFailureMode(event) {
   await fetchJSON('/api/axial-links', {
     method: 'POST',
     body: JSON.stringify({
-      annotation_id: selectedAnnotation.annotation_id,
+      annotation_id: annotationId,
       failure_mode_id: failureModeId,
     }),
   });
   elements.failureDialog.close();
   elements.failureForm.reset();
   await loadEmail(state.emailHashes[state.index]);
-}
-
-async function handleSuggestions() {
-  if (!state.annotations.length) {
-    alert('Add annotations before generating suggestions.');
-    return;
-  }
-  const emailHash = state.emailHashes[state.index];
-  const data = await fetchJSON(`/api/failure-modes/suggest?email_hash=${emailHash}`);
-  state.suggestions = data.suggestions || [];
-  if (!state.suggestions.length) {
-    alert('No suggestions available yet – add more detailed annotations.');
-    return;
-  }
-  const names = state.suggestions.map(s => s.display_name).join(', ');
-  if (confirm(`Suggestions: ${names}. Add the first one?`)) {
-    const suggestion = state.suggestions[0];
-    const created = await fetchJSON('/api/failure-modes', {
-      method: 'POST',
-      body: JSON.stringify({
-        display_name: suggestion.display_name,
-        slug: suggestion.slug,
-        definition: suggestion.definition,
-      }),
-    });
-    const annotationId = state.annotations[0].annotation_id;
-    await fetchJSON('/api/axial-links', {
-      method: 'POST',
-      body: JSON.stringify({
-        annotation_id: annotationId,
-        failure_mode_id: created.failure_mode_id,
-      }),
-    });
-    await loadEmail(state.emailHashes[state.index]);
-  }
 }
 
 function bindEvents() {
@@ -370,25 +423,54 @@ function bindEvents() {
       loadEmail(state.emailHashes[state.index]);
     }
   });
-  elements.annotateBtn.addEventListener('click', () => {
+  elements.addNoteBtn.addEventListener('click', () => {
     if (!elements.labelerSelect.value) {
-      alert('Select or create a labeler before annotating.');
+      alert('Select or create a labeler first.');
       return;
     }
-    elements.annotationDialog.showModal();
-    setTimeout(() => elements.annotationText.focus(), 50);
+    if (!state.judgment) {
+      alert('Create a judgment (Z/X) before adding notes.');
+      return;
+    }
+
+    // Pre-fill with existing note if it exists
+    const labelerId = elements.labelerSelect.value;
+    const existingNote = state.annotations.find(a => a.labeler_id === labelerId);
+    if (existingNote) {
+      elements.noteText.value = existingNote.open_code;
+    } else {
+      elements.noteText.value = '';
+    }
+
+    elements.noteDialog.showModal();
+    setTimeout(() => elements.noteText.focus(), 50);
   });
   elements.failureBtn.addEventListener('click', () => {
-    if (!state.annotations.length) {
-      alert('Add an annotation before assigning failure modes.');
+    if (!state.judgment) {
+      alert('Create a judgment (Z/X) before assigning failure modes.');
+      return;
+    }
+    if (state.judgment.pass_fail) {
+      alert('Failure modes are only for failed emails.');
       return;
     }
     populateFailureSelect();
     elements.failureDialog.showModal();
   });
-  elements.suggestBtn.addEventListener('click', handleSuggestions);
-  elements.annotationForm.addEventListener('submit', submitAnnotation);
+  elements.noteForm.addEventListener('submit', submitNote);
   elements.failureForm.addEventListener('submit', submitFailureMode);
+
+  // Handle Enter to submit note (Shift+Enter for new line)
+  elements.noteText.addEventListener('keydown', event => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      elements.noteForm.requestSubmit();
+    } else if (event.key === 'Escape') {
+      event.preventDefault();
+      event.stopPropagation();
+      elements.noteDialog.close();
+    }
+  });
   elements.newLabelerBtn.addEventListener('click', async () => {
     const name = prompt('Labeler name');
     if (!name) return;
@@ -417,25 +499,24 @@ function bindEvents() {
     if (event.target instanceof HTMLTextAreaElement || event.target instanceof HTMLInputElement) {
       return;
     }
-    if (event.key.toLowerCase() === 'z') {
-    event.preventDefault();
-    elements.annotationPassFail.value = '1';
-  } else if (event.key.toLowerCase() === 'x') {
-    event.preventDefault();
-    elements.annotationPassFail.value = '0';
-  } else if (event.key === 'ArrowLeft') {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      deleteJudgment();
+    } else if (event.key.toLowerCase() === 'z') {
+      event.preventDefault();
+      createJudgment(true);  // Pass
+    } else if (event.key.toLowerCase() === 'x') {
+      event.preventDefault();
+      createJudgment(false);  // Fail
+    } else if (event.key === 'ArrowLeft') {
       event.preventDefault();
       elements.prevBtn.click();
     } else if (event.key === 'ArrowRight') {
       event.preventDefault();
       elements.nextBtn.click();
-    } else if (event.key.toLowerCase() === 'a') {
-      if (!elements.labelerSelect.value) {
-        alert('Select or create a labeler before annotating.');
-        return;
-      }
+    } else if (event.key.toLowerCase() === 'n') {
       event.preventDefault();
-      elements.annotateBtn.click();
+      elements.addNoteBtn.click();
     } else if (event.key.toLowerCase() === 'f') {
       event.preventDefault();
       elements.failureBtn.click();

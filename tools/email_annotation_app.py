@@ -4,9 +4,7 @@
 from __future__ import annotations
 
 import json
-import re
 import uuid
-from collections import Counter
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -134,12 +132,33 @@ def list_emails(run_id: str) -> List[Dict[str, Any]]:
     return emails
 
 
+def get_judgment(
+    conn: duckdb.DuckDBPyConnection, email_hash: str, run_id: str, labeler_id: str
+) -> Optional[Dict[str, Any]]:
+    """Get the pass/fail judgment for an email."""
+    row = conn.execute(
+        """
+        SELECT pass_fail, judged_at, updated_at
+        FROM email_judgments
+        WHERE email_hash = ? AND run_id = ? AND labeler_id = ?
+        """,
+        (email_hash, run_id, labeler_id),
+    ).fetchone()
+    if not row:
+        return None
+    return {
+        "pass_fail": bool(row[0]),
+        "judged_at": row[1],
+        "updated_at": row[2],
+    }
+
+
 def get_annotations(
     conn: duckdb.DuckDBPyConnection, email_hash: str
 ) -> List[Dict[str, Any]]:
     rows = conn.execute(
         """
-        SELECT annotation_id, labeler_id, open_code, pass_fail, run_id, created_at
+        SELECT annotation_id, labeler_id, open_code, run_id, created_at
         FROM annotations
         WHERE email_hash = ?
         ORDER BY created_at DESC
@@ -147,13 +166,12 @@ def get_annotations(
         (email_hash,),
     ).fetchall()
     annotations = []
-    for anno_id, labeler_id, open_code, pass_fail, run_id, created_at in rows:
+    for anno_id, labeler_id, open_code, run_id, created_at in rows:
         annotations.append(
             {
                 "annotation_id": anno_id,
                 "labeler_id": labeler_id,
                 "open_code": open_code,
-                "pass_fail": bool(pass_fail) if pass_fail is not None else None,
                 "run_id": run_id,
                 "created_at": created_at,
             }
@@ -236,14 +254,21 @@ def api_email(email_hash: str):
         if not run_id:
             return jsonify({"error": "No trace runs available"}), 400
 
+        labeler_id = request.args.get("labeler_id")
+        if not labeler_id:
+            return jsonify({"error": "labeler_id required"}), 400
+
         email = load_email(run_id, email_hash)
         if not email:
             return jsonify({"error": "Email not found"}), 404
+
+        judgment = get_judgment(conn, email_hash, run_id, labeler_id)
         annotations = get_annotations(conn, email_hash)
         failure_modes = get_selected_failure_modes(conn, email_hash)
         return jsonify(
             {
                 "email": email,
+                "judgment": judgment,
                 "annotations": annotations,
                 "failure_modes": failure_modes,
                 "available_failure_modes": get_failure_modes(conn),
@@ -265,17 +290,22 @@ def api_labelers_create():
     return jsonify({"labeler_id": labeler_id, "name": name, "email": email})
 
 
-@app.post("/api/annotations")
-def api_annotations_create():
+@app.post("/api/judgments")
+def api_judgments_create():
+    """Create or update a pass/fail judgment for an email."""
     payload = request.json or {}
     email_hash_value = payload.get("email_hash")
-    open_code = payload.get("open_code", "").strip()
     pass_fail = payload.get("pass_fail")
     labeler_id = payload.get("labeler_id")
-    if not email_hash_value or not open_code:
-        return jsonify({"error": "email_hash and open_code are required"}), 400
-    annotation_id = uuid.uuid4().hex
-    created_at = datetime.utcnow().isoformat() + "Z"
+    open_code = payload.get("open_code", "").strip()
+
+    if not email_hash_value or pass_fail is None or not labeler_id:
+        return jsonify(
+            {"error": "email_hash, pass_fail, and labeler_id are required"}
+        ), 400
+
+    timestamp = datetime.utcnow().isoformat() + "Z"
+
     with get_conn() as conn:
         run_id = resolve_run_id(conn, request.args.get("run_id"))
         if not run_id:
@@ -284,41 +314,210 @@ def api_annotations_create():
         email = load_email(run_id, email_hash_value)
         if not email:
             return jsonify({"error": "Email not found"}), 404
-        if labeler_id:
-            exists = conn.execute(
-                "SELECT 1 FROM labelers WHERE labeler_id = ? LIMIT 1", (labeler_id,)
-            ).fetchone()
-            if not exists:
-                conn.execute(
-                    "INSERT INTO labelers(labeler_id, name) VALUES (?, ?)",
-                    (labeler_id, labeler_id),
-                )
+
+        # Ensure labeler exists
+        exists = conn.execute(
+            "SELECT 1 FROM labelers WHERE labeler_id = ? LIMIT 1", (labeler_id,)
+        ).fetchone()
+        if not exists:
+            conn.execute(
+                "INSERT INTO labelers(labeler_id, name) VALUES (?, ?)",
+                (labeler_id, labeler_id),
+            )
+
+        # Upsert judgment
+        existing = conn.execute(
+            "SELECT 1 FROM email_judgments WHERE email_hash = ? AND run_id = ? AND labeler_id = ?",
+            (email_hash_value, run_id, labeler_id),
+        ).fetchone()
+
+        if existing:
+            conn.execute(
+                """
+                UPDATE email_judgments
+                SET pass_fail = ?, updated_at = ?
+                WHERE email_hash = ? AND run_id = ? AND labeler_id = ?
+                """,
+                (bool(pass_fail), timestamp, email_hash_value, run_id, labeler_id),
+            )
+        else:
+            conn.execute(
+                """
+                INSERT INTO email_judgments(email_hash, run_id, labeler_id, pass_fail, judged_at, updated_at)
+                VALUES (?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    email_hash_value,
+                    run_id,
+                    labeler_id,
+                    bool(pass_fail),
+                    timestamp,
+                    timestamp,
+                ),
+            )
+
+        # Add annotation if provided
+        annotation_id = None
+        if open_code:
+            annotation_id = uuid.uuid4().hex
+            conn.execute(
+                """
+                INSERT INTO annotations(annotation_id, email_hash, labeler_id, open_code, run_id, created_at, updated_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    annotation_id,
+                    email_hash_value,
+                    labeler_id,
+                    open_code,
+                    run_id,
+                    timestamp,
+                    timestamp,
+                ),
+            )
+
+    return jsonify(
+        {
+            "email_hash": email_hash_value,
+            "run_id": run_id,
+            "labeler_id": labeler_id,
+            "pass_fail": bool(pass_fail),
+            "annotation_id": annotation_id,
+            "judged_at": timestamp,
+        }
+    )
+
+
+@app.delete("/api/judgments")
+def api_judgments_delete():
+    """Delete a judgment for an email."""
+    email_hash_value = request.args.get("email_hash")
+    labeler_id = request.args.get("labeler_id")
+
+    if not email_hash_value or not labeler_id:
+        return jsonify({"error": "email_hash and labeler_id required"}), 400
+
+    with get_conn() as conn:
+        run_id = resolve_run_id(conn, request.args.get("run_id"))
+        if not run_id:
+            return jsonify({"error": "No trace runs available"}), 400
+
+        # Delete associated axial_links FIRST (before deleting annotations)
         conn.execute(
             """
-            INSERT OR REPLACE INTO annotations(annotation_id, email_hash, labeler_id, open_code, pass_fail, run_id, created_at, updated_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            DELETE FROM axial_links
+            WHERE annotation_id IN (
+                SELECT annotation_id FROM annotations
+                WHERE email_hash = ? AND run_id = ? AND labeler_id = ?
+            )
+            """,
+            (email_hash_value, run_id, labeler_id),
+        )
+
+        # Delete associated annotations
+        conn.execute(
+            "DELETE FROM annotations WHERE email_hash = ? AND run_id = ? AND labeler_id = ?",
+            (email_hash_value, run_id, labeler_id),
+        )
+
+        # Delete judgment
+        conn.execute(
+            "DELETE FROM email_judgments WHERE email_hash = ? AND run_id = ? AND labeler_id = ?",
+            (email_hash_value, run_id, labeler_id),
+        )
+
+    return jsonify({"deleted": True})
+
+
+@app.post("/api/annotations")
+def api_annotations_create():
+    """Add an additional observation/annotation to an email (must have judgment first)."""
+    payload = request.json or {}
+    email_hash_value = payload.get("email_hash")
+    open_code = payload.get("open_code", "").strip()
+    labeler_id = payload.get("labeler_id")
+
+    if not email_hash_value or not open_code or not labeler_id:
+        return jsonify(
+            {"error": "email_hash, open_code, and labeler_id are required"}
+        ), 400
+
+    annotation_id = uuid.uuid4().hex
+    created_at = datetime.utcnow().isoformat() + "Z"
+
+    with get_conn() as conn:
+        run_id = resolve_run_id(conn, request.args.get("run_id"))
+        if not run_id:
+            return jsonify({"error": "No trace runs available"}), 400
+
+        # Check judgment exists
+        judgment_exists = conn.execute(
+            "SELECT 1 FROM email_judgments WHERE email_hash = ? AND run_id = ? AND labeler_id = ?",
+            (email_hash_value, run_id, labeler_id),
+        ).fetchone()
+
+        if not judgment_exists:
+            return jsonify(
+                {"error": "Must create judgment before adding annotations"}
+            ), 400
+
+        conn.execute(
+            """
+            INSERT INTO annotations(annotation_id, email_hash, labeler_id, open_code, run_id, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 annotation_id,
                 email_hash_value,
                 labeler_id,
                 open_code,
-                bool(pass_fail) if pass_fail is not None else None,
-                email["run_id"],
+                run_id,
                 created_at,
                 created_at,
             ),
         )
+
     return jsonify(
         {
             "annotation_id": annotation_id,
             "email_hash": email_hash_value,
             "labeler_id": labeler_id,
             "open_code": open_code,
-            "pass_fail": pass_fail,
             "created_at": created_at,
         }
     )
+
+
+@app.put("/api/annotations/<annotation_id>")
+def api_annotations_update(annotation_id: str):
+    """Update an existing annotation's open_code."""
+    payload = request.json or {}
+    open_code = payload.get("open_code", "").strip()
+
+    if not open_code:
+        return jsonify({"error": "open_code is required"}), 400
+
+    updated_at = datetime.utcnow().isoformat() + "Z"
+
+    with get_conn() as conn:
+        # Check if annotation exists
+        existing = conn.execute(
+            "SELECT 1 FROM annotations WHERE annotation_id = ?", (annotation_id,)
+        ).fetchone()
+
+        if not existing:
+            return jsonify({"error": "Annotation not found"}), 404
+
+        conn.execute(
+            """
+            UPDATE annotations
+            SET open_code = ?, updated_at = ?
+            WHERE annotation_id = ?
+            """,
+            (open_code, updated_at, annotation_id),
+        )
+
+    return jsonify({"annotation_id": annotation_id, "open_code": open_code, "updated_at": updated_at})
 
 
 @app.delete("/api/annotations/<annotation_id>")
@@ -394,28 +593,6 @@ def api_axial_links_delete():
             (annotation_id, failure_mode_id),
         )
     return jsonify({"removed": True})
-
-
-@app.get("/api/failure-modes/suggest")
-def api_failure_modes_suggest():
-    email_hash = request.args.get("email_hash")
-    if not email_hash:
-        return jsonify({"error": "email_hash required"}), 400
-    with get_conn() as conn:
-        annotations = get_annotations(conn, email_hash)
-    word_counter: Counter[str] = Counter()
-    for ann in annotations:
-        tokens = re.findall(r"[A-Za-z]{4,}", ann["open_code"].lower())
-        word_counter.update(tokens)
-    suggestions = [
-        {
-            "display_name": word.title(),
-            "definition": f"Auto-suggested from frequent token '{word}'",
-            "slug": word,
-        }
-        for word, _ in word_counter.most_common(5)
-    ]
-    return jsonify({"suggestions": suggestions})
 
 
 if __name__ == "__main__":

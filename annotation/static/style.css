@@ -96,6 +96,17 @@ body {
   white-space: pre-wrap;
   line-height: 1.45;
   color: #1c2155;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.email-body.judgment-pass {
+  background: #edfcf2;
+  border-color: #a7f3c0;
+}
+
+.email-body.judgment-fail {
+  background: #fef3f2;
+  border-color: #fecdca;
 }
 
 .email-body blockquote {
@@ -319,4 +330,26 @@ menu button[value="cancel"] {
 
 #llm-commitments li {
   margin-bottom: 0.3rem;
+}
+
+#judgment-status {
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+  background: #f0f2f8;
+  color: #5c5f7a;
+  transition: all 0.3s ease;
+}
+
+#judgment-status.pass {
+  background: #edfcf2;
+  color: #0d7a3d;
+  border: 2px solid #a7f3c0;
+}
+
+#judgment-status.fail {
+  background: #fef3f2;
+  color: #c4320a;
+  border: 2px solid #fecdca;
 }

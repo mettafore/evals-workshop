@@ -46,14 +46,18 @@
         <h3>LLM Commitments</h3>
         <ul id="llm-commitments"></ul>
       </section>
+      <section>
+        <h2>Judgment</h2>
+        <div id="judgment-status">No judgment yet. Press Z (pass) or X (fail).</div>
+      </section>
+
       <div class="annotation-actions">
-        <button id="annotate-btn" type="button">Add Annotation (A)</button>
+        <button id="add-note-btn" type="button">Add Note (N)</button>
         <button id="failure-btn" type="button">Link Failure Mode (F)</button>
-        <button id="suggest-btn" type="button">Generate Failure Modes</button>
       </div>
 
       <section>
-        <h2>Annotations</h2>
+        <h2>Notes</h2>
         <ul id="annotation-list" class="annotation-list"></ul>
       </section>
 
@@ -64,18 +68,12 @@
     </div>
   </div>
 
-  <!-- Annotation modal -->
-  <dialog id="annotation-dialog">
-    <form method="dialog" id="annotation-form">
-      <h3>New Annotation</h3>
-      <label for="annotation-text">Observation (optional for pass)</label>
-      <textarea id="annotation-text" rows="4"></textarea>
-      <label for="annotation-passfail">Pass / Fail</label>
-      <select id="annotation-passfail">
-        <option value="">—</option>
-        <option value="1">Pass</option>
-        <option value="0">Fail</option>
-      </select>
+  <!-- Add note modal -->
+  <dialog id="note-dialog">
+    <form method="dialog" id="note-form">
+      <h3>Add Note</h3>
+      <label for="note-text">Observation</label>
+      <textarea id="note-text" rows="4" required></textarea>
       <menu>
         <button value="cancel" type="reset">Cancel (Esc)</button>
         <button value="confirm" type="submit">Save (Enter)</button>
