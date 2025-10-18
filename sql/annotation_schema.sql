@@ -1,5 +1,3 @@
-PRAGMA enable_verification;
-
 CREATE TABLE IF NOT EXISTS labelers (
     labeler_id TEXT PRIMARY KEY,
     name TEXT,

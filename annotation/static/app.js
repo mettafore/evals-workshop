@@ -29,6 +29,7 @@ const elements = {
   addNoteBtn: qs('#add-note-btn'),
   failureBtn: qs('#failure-btn'),
   emailSubject: qs('#email-subject'),
+  emailHash: qs('#email-hash'),
   metadataChips: qs('#metadata-chips'),
   emailBody: qs('#email-body'),
   annotationList: qs('#annotation-list'),
@@ -121,6 +122,7 @@ async function loadEmail(emailHash) {
   if (!labelerId) {
     return;
   }
+  console.log(`Loading email ${state.index + 1}/${state.emailHashes.length}: ${emailHash}`);
   const data = await fetchJSON(`/api/email/${encodeURIComponent(emailHash)}?labeler_id=${encodeURIComponent(labelerId)}`);
   const email = data.email;
   state.judgment = data.judgment;  // {pass_fail, judged_at, updated_at} or null
@@ -128,6 +130,7 @@ async function loadEmail(emailHash) {
   state.failureModes = data.available_failure_modes || [];
 
   elements.emailSubject.textContent = email.subject || '(no subject)';
+  elements.emailHash.textContent = email.email_hash || '—';
   elements.metadataChips.innerHTML = '';
 
   // Only show essential email metadata with fallbacks
@@ -499,7 +502,11 @@ function bindEvents() {
     if (event.target instanceof HTMLTextAreaElement || event.target instanceof HTMLInputElement) {
       return;
     }
+    // Don't handle Escape if a dialog is open - let the dialog handle it
     if (event.key === 'Escape') {
+      if (elements.noteDialog.open || elements.failureDialog.open) {
+        return;  // Let dialog's native Escape handling close it
+      }
       event.preventDefault();
       deleteJudgment();
     } else if (event.key.toLowerCase() === 'z') {
