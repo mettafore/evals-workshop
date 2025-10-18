@@ -1,0 +1,91 @@
+# Prompt for Generating Email Summary Coherence Evaluation Dataset
+
+## Task
+Generate a dataset for evaluating email summary coherence using LLM-as-a-judge. Each entry should contain an email, a summary, human judgment (PASS/FAIL), and human reasoning focused ONLY on coherence.
+
+## Coherence Definition
+Coherence means the summary maintains:
+- **Logical flow**: Ideas progress in a sensible order
+- **Causal relationships**: Cause-and-effect connections are preserved
+- **Narrative structure**: Information builds naturally from context → problem → solution → outcome
+- **Connected ideas**: Related concepts are grouped together, not scattered
+
+## Dataset Entry Format
+```json
+{
+  "email_id": "XXX",
+  "email": "Full email text with realistic business content",
+  "summary": "A summary that either maintains or breaks coherence",
+  "human_judgement": "PASS or FAIL",
+  "human_reasoning": "Specific explanation of why coherence passes or fails"
+}
+```
+
+## Email Requirements
+Create realistic business emails (150-250 words) that include:
+- Clear sequence of events or ideas
+- Cause-and-effect relationships
+- Multiple connected points
+- Business contexts: project updates, incident reports, proposals, meeting follow-ups, decision announcements
+- Natural progression: background → current situation → action items
+
+## Summary Requirements
+
+### For PASS examples (coherent summaries):
+- Maintain the logical sequence from the email
+- Preserve cause-and-effect relationships
+- Group related information together
+- Follow natural narrative flow
+- Keep the same chronological order when relevant
+
+### For FAIL examples (incoherent summaries):
+Create summaries with these specific coherence problems:
+1. **Scrambled sequence**: Present events/ideas out of logical order
+2. **Broken causality**: Separate cause from effect or present effect before cause
+3. **Random ordering**: Jump between unrelated points without transitions
+4. **Disconnected ideas**: Split related concepts across the summary
+5. **Reversed narrative**: Start with conclusions, then jump to background, then middle
+
+**Important**: FAIL summaries should still be factually accurate and complete - ONLY coherence should be wrong.
+
+## Human Reasoning Guidelines
+
+### For PASS judgments, explain:
+- How the logical flow is maintained
+- Why the sequence makes sense
+- How ideas build on each other naturally
+
+### For FAIL judgments, explain:
+- Exactly where the logical flow breaks
+- Which ideas are presented out of order
+- How cause-and-effect relationships are disrupted
+- Why the sequence is confusing
+
+## Distribution
+- Generate 60% FAIL examples, 40% PASS examples
+- Vary the types of coherence failures
+- Include different business contexts
+
+## Example Entry
+
+```json
+{
+  "email_id": "001",
+  "email": "Hi Team,\n\nI wanted to update you on yesterday's system deployment. We started the rollout at 2 PM as planned, and initial tests were successful.\n\nHowever, at 3:30 PM, we noticed increased latency in the payment service. Investigation revealed that the new caching layer was incorrectly configured, causing database connection exhaustion.\n\nWe immediately rolled back the changes at 4 PM, and system performance returned to normal within 15 minutes. The issue has been fixed in staging, and we'll retry the deployment next Tuesday with additional monitoring.\n\nPlease review the attached logs before our retrospective tomorrow.\n\nThanks,\nAlex",
+  "summary": "System performance returned to normal after 15 minutes. The deployment started at 2 PM yesterday. Alex wants everyone to review logs for tomorrow's retrospective. At 3:30 PM there was latency in payments due to cache misconfiguration. They rolled back at 4 PM and will retry Tuesday.",
+  "human_judgement": "FAIL",
+  "human_reasoning": "The summary lacks coherence because it starts with the resolution (performance normal) before explaining the problem. It then jumps back to the beginning (2 PM start), forward to the future (retrospective), back to the middle (3:30 PM issue), and ends with actions taken. The chronological narrative and cause-effect chain are completely scrambled, making it hard to follow the sequence of events."
+}
+```
+
+Email id should start from {email_id} and increment sequentially.
+
+## Quality Checks
+Before finalizing each entry, verify:
+1. The email has clear logical structure
+2. PASS summaries maintain that structure
+3. FAIL summaries specifically break coherence (not other qualities)
+4. Human reasoning precisely identifies coherence issues
+5. The content is realistic and business-appropriate
+
+Generate 25 diverse examples following these guidelines.
