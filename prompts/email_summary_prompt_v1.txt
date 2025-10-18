@@ -6,14 +6,14 @@ Instructions:
 3. Do not invent facts that are not present in the email.
 
 Email metadata:
-Subject: {{subject}}
-From: {{from_line}}
-To: {{to_line}}
-Cc: {{cc_line}}
+Subject: {subject}
+From: {from_line}
+To: {to_line}
+Cc: {cc_line}
 
 Email body (delimited by triple backticks):
 ```
-{{body}}
+{body}
 ```
 
 Return your answer as JSON with keys `summary` (string) and `commitments` (array of strings).
