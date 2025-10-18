@@ -4,9 +4,6 @@ Instructions:
 1. Identify every explicit commitment or request and list it as a bullet.
 2. For each commitment, state the responsible owner and due date if it exists; otherwise write `Owner: Unknown` or `Due: Not stated`.
 3. Do not invent facts that are not present in the email.
-4. Think step by step before emitting the final JSON.
-5. For the summary, ensure clarity and brevity, keeping it under 120 words. 
-6. A new person unfamiliar with the email should be able to understand the key points and action items.
 
 Email metadata:
 Subject: {{subject}}
